@@ -1,0 +1,23 @@
+<div class="units-row" ng-controller="access">
+    <div class="unit-100 block content">
+        <table class="table-stripped table-bordered">
+            <thead>
+            <th>Контроллер</th>
+            <th>Экшен</th>
+            <th>Доступен</th>
+            <th class="text-centered width-10">Действие</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in controllers">
+                <td>{{item.c_title}}</td>
+                <td>{{item.a_title}}</td>
+                <td>{{item.usergroup}}</td>
+                <td class="text-centered">
+                    <button class="btn btn-smaller btn-green btn_icon" ng-click="editController(item.id)"><i class="fa fa-cog"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

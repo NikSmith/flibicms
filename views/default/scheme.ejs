@@ -1,0 +1,307 @@
+<table class="table-bordered width-100 scheme">
+    <tr>
+        <td colspan="2" rowspan="2">
+            <span>logo</span>
+            <ul my-sortable="logo" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'logo'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>centerHead</span>
+            <ul my-sortable="centerHead" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'centerHead' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>rightHead</span>
+            <ul my-sortable="rightHead" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'rightHead' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <span>bottomHead</span>
+            <ul my-sortable="bottomHead" class="sortable">
+                <li  data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomHead' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span>secondHead</span>
+            <ul my-sortable="secondHead" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'secondHead' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            <span>slider / landing</span>
+            <ul my-sortable="slider" class="sortable">
+                <li  data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'slider'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span>topBlock</span>
+            <ul my-sortable="topBlock" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'topBlock'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>block1</span>
+            <ul my-sortable="block1" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'block1'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td class="width-25">
+            <span>block2</span>
+            <ul my-sortable="block2" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'block2'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td class="width-25">
+            <span>block3</span>
+            <ul my-sortable="block3" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'block3'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td class="width-25">
+            <span>block4</span>
+            <ul my-sortable="block4" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'block4'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span>top</span>
+            <ul my-sortable="top" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position': 'top'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="3" colspan="1">
+            <span>left</span>
+            <ul my-sortable="left" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="ui-state-default btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'left'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td colspan="2">
+            <span>topMain</span>
+            <ul my-sortable="topMain" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position': 'topMain'}:true |  orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td colspan="1" rowspan="3">
+            <span>right</span>
+            <ul my-sortable="right" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'right'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h4>body</h4>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <span>bottomMain</span>
+            <ul my-sortable="bottomMain" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomMain' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span>bottom</span>
+            <ul my-sortable="bottom" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'bottom'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>bottomBlock1</span>
+            <ul my-sortable="bottomBlock1" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomBlock1' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>bottomBlock2</span>
+            <ul my-sortable="bottomBlock2" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomBlock2' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>bottomBlock3</span>
+            <ul my-sortable="bottomBlock3" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="ui-state-default btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomBlock3' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>bottomBlock4</span>
+            <ul my-sortable="bottomBlock4" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="ui-state-default btn width-100" ng-repeat="widget in widgetsBind | filter:'bottomBlock4' | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>footerBlock1</span>
+            <ul my-sortable="footerBlock1" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'footerBlock1'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>footerBlock2</span>
+            <ul my-sortable="footerBlock2" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'footerBlock2'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>footerBlock3</span>
+            <ul my-sortable="footerBlock3" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'footerBlock3'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <span>footerBlock4</span>
+            <ul my-sortable="footerBlock4" class="sortable">
+                <li data-id="{{widget.id}}" my-draggable=".sortable" draggable-from="{{widget.position}}" class="btn width-100" ng-repeat="widget in widgetsBind | filter:{'position':'footerBlock4'}:true | orderBy:'+sort'">
+                    {{widget.title}}
+                    <a href="javascript:void(0)" ng-click="deleteWidget(widget.id)" title="Удалить виджет"><i class="fa fa-times"></i></a>
+                    <a href="javascript:void(0)" ng-click="editWidget(widget.id)" title="Настроить виджет"><i class="fa fa-cog"></i></a>
+                    <a href="javascript:void(0)" ng-click="switchWidget(widget.id)" title="Включить/Выключить"><i ng-class="{ 'fa-circle-o': !widget.enabled , 'fa-dot-circle-o': widget.enabled  }" class="fa"></i></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

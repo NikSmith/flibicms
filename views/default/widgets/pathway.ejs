@@ -1,0 +1,11 @@
+
+<nav class="breadcrumbs breadcrumbs-path end">
+    <ul>
+        <li><a href="/">Главная</a></li>
+        <% if (vars.pathway && vars.pathway.pages){ %>
+            <% for (var i=0; i < vars.pathway.pages.length; i++){ %>
+                <li><a href="<%- vars.pathway.prelink %>/<%if (vars.pathway.pages[i].NSLevel != 0){%><%-vars.pathway.pages[i].slug%><%}%>"><%- vars.pathway.pages[i].title %></a></li>
+            <% } %>
+        <% } %>
+    </ul>
+</nav>

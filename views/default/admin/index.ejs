@@ -1,0 +1,129 @@
+<h2>Административная панель</h2>
+<p>Добро пожаловать в панель управления Вашим сайтом.</p>
+<div ng-controller="dashboard">
+    <ul class="blocks-4">
+        <li>
+            <div class="adminBlock">
+                <div class="title">Просмотры за день</div>
+                <div class="desc units-row end">
+                    <div class="unit-30 con_image">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="unit-70">
+                        <span><%- vars.visitors %></span>
+                        <p>Статистика обращений к сайту за день</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="adminBlock">
+                <div class="title">Потребление памяти - Rss</div>
+                <div class="desc units-row end">
+                    <div class="unit-30 con_image">
+                        <i class="fa fa-area-chart"></i>
+                    </div>
+                    <div class="unit-70">
+                        <span><%- (vars.memory.rss/1000/1000).toFixed(2) %> Mb</span>
+                        <p>Информация о потреблении памяти.</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="adminBlock">
+                <div class="title">Потребление памяти - heapTotal</div>
+                <div class="desc units-row end">
+                    <div class="unit-30 con_image">
+                        <i class="fa fa-area-chart"></i>
+                    </div>
+                    <div class="unit-70">
+                        <span><%- (vars.memory.heapTotal/1000/1000).toFixed(2) %> Mb</span>
+                        <p>Информация о потреблении памяти.</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="adminBlock">
+                <div class="title">Потребление памяти - heapUsed</div>
+                <div class="desc units-row end">
+                    <div class="unit-30 con_image">
+                        <i class="fa fa-area-chart"></i>
+                    </div>
+                    <div class="unit-70">
+                        <span><%- (vars.memory.heapUsed/1000/1000).toFixed(2) %> Mb</span>
+                        <p>Информация о потреблении памяти.</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul class="blocks-2">
+        <li>
+            <div class="adminBlock">
+                <div class="title">Анализ позиций сайта</div>
+                <div class="desc width-100">
+                    <form class="forms width-100" name="analytics">
+                        <label>
+                            Пользователь
+                            <input type="text" name="user" class="width-50" ng-class="(submitted && analytics.user.$error.required)?'input-error':''" required ng-model="user" />
+                        </label>
+                        <label>
+                            Ключ
+                            <input type="text" name="key" class="width-50" ng-class="(submitted && analytics.key.$error.required)?'input-error':''" required ng-model="key" />
+                        </label>
+                        <label>
+                            Код региона
+                            <input type="text" name="code" class="width-50" ng-class="(submitted && analytics.code.$error.required)?'input-error':'' " required ng-model="code" />
+                        </label>
+                        <label>
+                            Адрес сайта
+                            <input type="text" name="site" class="width-50" ng-class="(submitted && analytics.site.$error.required)?'input-error':''" required ng-model="site"/>
+                        </label>
+                        <label>
+                            Запрос
+                            <input type="text" name="request" class="width-100" ng-class="(submitted && analytics.request.$error.required)?'input-error':''" required ng-model="request"/>
+                        </label>
+                        <div class="text-centered"><button class="btn btn-blue" ng-click="checkPosition()">Проверить</button></div>
+                    </form>
+                    <div class="posAnalytics">
+                        <strong>Позиция сайта в ТОП-100</strong>
+                        <span>Неизвестно</span>
+                        <p class="tools-message-red" style="color: #ffffff; padding: 10px;">Данный функционал появится в следующих версиях системы</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="adminBlock">
+                <div class="title">Рассылка почты</div>
+                <div class="desc width-100">
+                    <form class="forms width-100" name="mail">
+                        <label>
+                            Тема сообщения
+                            <input type="text" name="subject" required ng-model="mailsubject" ng-class="(submittedMail && mail.subject.$error.required)?'input-error':''" class="width-100"/>
+                        </label>
+                        <label>
+                            Группа пользователей
+                            <select name="group" class="width-50" required ng-class="(submittedMail && mail.group.$error.required)?'input-error':''" ng-model="mailgroup">
+                                <% vars.groups.forEach(function(group){ %>
+                                <% if (group.role != 'guest'){ %>
+                                <option value="<%- group.id %>"><%- group.title %></option>
+                                <% } %>
+                                <% }); %>
+                            </select>
+                        </label>
+                        <label>
+                            Текст письма
+                            <textarea name="message" style="min-height: 200px;" ng-model="mailmessage"  ng-class="(submittedMail && mail.message.$error.required)?'input-error':''" required class="width-100"></textarea>
+                        </label>
+                        <div class="text-centered"><button class="btn btn-blue" ng-click="sendEmail()">Отправить</button></div>
+                    </form>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

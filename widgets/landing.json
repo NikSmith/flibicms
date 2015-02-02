@@ -1,0 +1,9 @@
+[
+    {
+       "tag" : "input",
+       "type" : "text",
+       "desc" : "Цвет или фон блока",
+       "name" : "background",
+       "class" : "width-100"
+    }
+]

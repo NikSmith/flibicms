@@ -1,0 +1,279 @@
+body {
+    min-width: 1200px;
+    background: #EDEDED;
+}
+body header {
+    background: #0b2f51;
+    margin-bottom: 1.65em;
+    height: 70px;
+}
+body .btn_icon {
+    padding: 6px 10px;
+}
+body .active {
+    color: #de2c3b;
+}
+.scheme {
+    margin-bottom: 0;
+}
+.scheme .ui-sortable-helper {
+    max-width: 300px !important;
+}
+.scheme .btn {
+    background: #C9C9C9;
+    color: #000;
+    border: 1px solid #383838;
+}
+.scheme span {
+    color: #fff;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    border-bottom: 1px solid;
+    background: #293F50;
+}
+.scheme h4 {
+    height: 40px;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    margin: 0;
+    background: #888888;
+    text-align: center;
+}
+.scheme tr td {
+    padding: 0;
+    background: #EDEDED;
+    border: 1px solid #7A7A7A;
+}
+.scheme .btn {
+    text-align: left;
+    padding: 8px 10px;
+}
+.scheme a {
+    float: right;
+    margin-left: 5px;
+    color: #000000;
+}
+.scheme a:hover {
+    color: #ffffff;
+}
+.units-container {
+    width: 1200px;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.logo {
+    margin: 22px 0;
+    display: inline-block;
+    font-size: 30px;
+    color: #ffffff !important;
+    text-decoration: none;
+}
+.bt-main a {
+    display: inline-block;
+    padding: 10px;
+    color: #ffffff;
+}
+.bt-main a span {
+    margin-left: 5px;
+}
+.main_menu {
+    background: #ffffff;
+}
+.main_menu ul li {
+    padding: 0 10px;
+}
+.main_menu ul li:hover {
+    background: #1a52a5;
+}
+.main_menu ul li:hover a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.menuList {
+    margin: 0;
+}
+.menuList li {
+    margin-bottom: 1px;
+}
+.menuList .btn {
+    padding: 0.3625em 0.45em;
+    text-align: left;
+}
+table td {
+    padding: 10px 1.1em 5px;
+}
+.modal footer {
+    min-height: 40px;
+}
+.main_block .title {
+    background: #1a52a5;
+    color: #fff;
+    padding: 6px 10px;
+}
+.main_block .content {
+    min-height: 480px;
+}
+.block {
+    background: #fff;
+    padding: 0.8em;
+    border-radius: 8px 0;
+}
+.modal header {
+    padding: 30px 40px 0px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    background: transparent;
+    margin: 0;
+    height: inherit;
+}
+.controllersList ul ul {
+    display: none;
+}
+.controllersList button {
+    margin-bottom: 1px;
+}
+.controllersList .child {
+    margin-left: 1em;
+}
+.controllersList .active {
+    color: #de2c3b;
+    font-weight: bold;
+}
+.controllersList a {
+    font-size: 12.75px;
+    padding: .4em 0;
+}
+.notPages {
+    line-height: 480px;
+    font-size: 13px;
+}
+.sortable {
+    min-height: 40px;
+    margin: 5px;
+    list-style: none;
+}
+.sortable li {
+    margin-bottom: 1px;
+    max-width: 100% !important;
+    display: inline-block;
+}
+.sortable .ui-sortable-placeholder {
+    width: 100% !important;
+    background: #f2d6a2;
+    visibility: visible !important;
+}
+.ui-draggable-dragging {
+    width: 200px !important;
+}
+.widgetsItem {
+    max-width: 216px;
+}
+#pageBody {
+    min-height: 418px;
+}
+.pagination {
+    float: right;
+    left: 0;
+}
+footer .units-container {
+    border-top: 1px solid #ccc;
+    line-height: 50px;
+    font-size: 13px;
+}
+.nav_btn {
+    width: 90px;
+    display: inline-block;
+    padding: 15px 0;
+    line-height: 1;
+    color: #fff;
+}
+.nav_btn .nav_icon {
+    font-size: 24px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+.nav_btn .nav_title {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+}
+.progress-bar {
+    height: 5px;
+    background: #4a4cd7;
+    width: 0;
+}
+#tinywidget {
+    min-height: 330px;
+}
+.fieldlist a {
+    display: inline-block;
+    padding: 0;
+}
+.fieldlist a i {
+    width: inherit !important;
+}
+.fieldlist span {
+    padding: 0;
+}
+.fields li {
+    height: 60px;
+}
+.adminBlock {
+    background: #ffffff;
+}
+.adminBlock .title {
+    margin-bottom: 1em;
+}
+.adminBlock .desc {
+    position: relative;
+    padding: 1em 1em 0;
+    display: inline-block;
+}
+.adminBlock .con_image {
+    font-size: 46px;
+}
+.adminBlock span {
+    font-size: 26px;
+    float: right;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.adminBlock p {
+    float: right;
+    color: #B3B3B3;
+    font-size: 12px;
+    line-height: 1.5;
+    width: 100%;
+    text-align: right;
+}
+.visitors {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+    text-align: center;
+    border: 3px solid #41e222;
+}
+.visitors span {
+    font-size: 18px;
+    font-weight: bold;
+}
+.posAnalytics {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 240px;
+}
+.posAnalytics span {
+    float: left;
+}
+.posAnalytics p {
+    float: left;
+    text-align: left;
+}

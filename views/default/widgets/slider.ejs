@@ -1,0 +1,32 @@
+<div id="slider_<%- vars.slider[0].id%>" class="wslider" style="height: <%- vars.slider[0].height%>px;">
+    <ul>
+        <% for(var i=0; i<vars.slides.length; i++){%>
+            <li style="background: <% if (vars.slides[i].background[0] == "#"){ %><%- vars.slides[i].background%><% } else { %>url('<%- vars.slides[i].background%>') <%- vars.slides[i].repeat%> <%- vars.slides[i].width%>% <%- vars.slides[i].height%>%<% } %>">
+                <div class="units-container" style="width: <%- vars.slider[0].width%>px; height: <%- vars.slider[0].height%>px;  margin:0 auto">
+                    <div class="units-row end">
+                        <div class="unit-100">
+                            <%- vars.slides[i].content%>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+</div>
+</div>
+<script>
+    $("#slider_<%- vars.slider[0].id%>").wslider({
+        animation:"<%- vars.slider[0].animation%>",
+        playspeed:<%- vars.slider[0].playspeed%>,
+        buttons_code:{
+            prev:"<a href='javascript:void(0)' class='slide-prev'><i class='fa fa-angle-left'></i></a>",
+            next:"<a href='javascript:void(0)' class='slide-next'><i class='fa fa-angle-right'></i></a>"
+        },
+        <% if (!vars.slider[0].navigation){%>
+        navigation:false,
+        <%}%>
+        <% if (!vars.slider[0].pagination){%>
+        buttons: false
+        <%}%>
+    });
+</script>

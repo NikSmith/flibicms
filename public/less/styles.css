@@ -1,0 +1,662 @@
+There is no no-color option ("less --help" for help)
+/* Основные парамметры */
+@linkColor: #134da5;  /*Основной цвет ссылок*/
+@font: 14px Arial,Helvetica,sans-serif;
+@lineHeight: 1.5;
+@maxWidthWrap:1920px;
+
+/* Меню */
+@menuHWidth: 200px;                   /* Ширина 2го и 3го уровня для горизонтального меню*/
+@menuVWidth: 200px;                   /* Ширина 2го и 3го уровня для вертикального меню*/
+@menuLH: 1.5;                        /* Высота 1го уровня меню */
+@menuLHSecond: 62px;                  /* Высота 2го и 3го уровня горизонтального меню */
+@menuABorder:3px solid transparent;   /* Бордер ссылки горизонтального меню */
+@menuABorderHover:3px solid #ffffff;  /* Бордер ссылки при наведении горизонтального меню */
+@menuUlBorderTop: 1px solid #ffffff;  /* Верхний бордер 2 уровня для горизонтального меню */
+
+@menuH1Bg: transparent;
+@menuH2Bg: #2c3e50;
+@menuH3Bg: #2c3e50;
+
+@menuV1Bg :transparent;
+@menuV2Bg :green;
+@menuV3Bg :transparent;
+
+@menuLinkHColor: #ffffff;       /* Цвет ссылок горизонтального меню */
+@menuLinkHColorHover: #de2c3b;  /* Цвет ссылок горизонтального меню при наведении для 1го уровня*/
+@menuLinkVColor: #000000;       /* Цвет ссылок вертикального меню */
+
+@menuHBGHover: rgba(0,0,0,0.35);   /* Цвет фона пункта меню при наведении для горизонтального меню*/
+@menuVBGHover: rgba(0,0,0,0.1);   /* Цвет фона пункта меню при наведении для вертикального меню*/
+
+/*body*/
+@bodyBg:#ffffff;
+@bodyColor:#000;
+
+/*header*/
+@headerBg:#141414;     /* Цвет фона */
+
+/* firstHeader */
+@fHBg:#2c3e50;              /* Цвет фона */
+@fHColor: #ffffff;          /* Цвет шрифта */
+@fHmHeight: 30px;           /* Минимальная высота */
+@fHBB: 1px solid #ffffff;   /* Нижняя граница блока */
+@fHLpadding: 5px 0 0;      /* Отступ правой группы блоков в firstHeader*/
+
+/*logo*/
+@logoPadding: 32px 0;
+
+/*secondHeader*/
+@secondHeaderLH: 45px;  /*Межстрочный интервал для secondMenu*/
+@secondHeader:#e9edf0;  /*Фон блока*/
+@secondHeaderC:#fff;    /*Цвет шрифта*/
+@secondHeaderFS: 14px; /*Размер шрифта*/
+
+@sliderBg: #ffffff;
+
+/*topBlock*/
+@topBlockBG: #ffffff;
+@topBlockTitleColor: #666;
+@topBlockColor: #6666;
+
+/*blocks*/
+@blocksBg:#ffffff;      /*Фон блока*/ /*#CB3535*/
+@blocksTitleColor: #000; /*Цвет заголовков виджетов*/
+@blocksColor: #000;     /*Цвет текста в виджетах*/
+
+/*Top*/
+@topBg: #e9edf0;
+
+/*mainContainer*/
+@mainContainerBg:#ffffff;           /*Цвет фона главного контейнера*/
+
+@leftWidgetBackground: inherit;     /*Цвет фона виджетов в левом блоке*/
+@leftWidgetPadding: 0;       /*Внутренний отступ виджетов в левом блоке*/
+@leftWidgetBorder-radius: 0;      /*Скругление виджетов*/
+@leftWidgetTitle: #000000;          /*Цвет заголовков виджетов в левом блоке*/
+@leftWidgetColor: #000000;             /*Цвет текста виджетов в левом блоке*/
+
+@rightWidgetBackground: inherit;     /*Цвет фона виджетов в правом блоке*/
+@rightWidgetPadding: 0;       /*Внутренний отступ виджетов в правом блоке*/
+@rightWidgetBorder-radius: 0;      /*Скругление виджетов*/
+@rightWidgetTitle: #000000;          /*Цвет заголовков виджетов в правом блоке*/
+@rightWidgetColor: #ccc;             /*Цвет текста виджетов в правом блоке*/
+
+@topMainWidgetBackground: inherit;     /*Цвет фона виджетов в центральном верхнем блоке*/
+@topMainWidgetPadding: 0;       /*Внутренний отступ виджетов центральном верхнем левом блоке*/
+@topMainWidgetBorder-radius: 0;      /*Скругление виджетов*/
+@topMainWidgetTitle: #000000;          /*Цвет заголовков виджетов в центральном верхнем блоке*/
+@topMainWidgetColor: #ccc;             /*Цвет текста виджетов в центральном верхнем блоке*/
+
+@bottomMainWidgetBackground: inherit;     /*Цвет фона виджетов в центральном нижнем блоке*/
+@bottomMainWidgetPadding: 0;       /*Внутренний отступ виджетов центральном нижнем блоке*/
+@bottomMainWidgetBorder-radius: 0;      /*Скругление виджетов*/
+@bottomMainWidgetTitle: #000000;          /*Цвет заголовков виджетов в центральном нижнем блоке*/
+@bottomMainWidgetColor: #ccc;             /*Цвет текста виджетов в центральном нижнем блоке*/
+
+/*Bottom*/
+@bottomBg:#ffffff;
+@bottomColor: #000;
+@bottomTitleColor: #000;
+
+/*BlockBottom*/
+@blocksBottomBg:#2c3e50;                /*Цвет фона блока*/
+@blocksBottomColorTitle: #ffffff;       /*Цвет заголовков виджетов*/
+@blocksBottomColor: #ffffff;            /*Цвет текста виджетов*/
+@blocksBottomMarginTop: 1.65em;         /*Верхний отст62pxуп виджетов*/
+@blocksBottomMarginBottom: 1.65em;      /*Нижний отступ для виджетов*/
+
+
+/*BlocksFooter*/
+@footerBg: #233140;               /*Фон футера*/
+@footerColor: #ffffff;            /*Цвет текста в футере*/
+@footerHeight:85px;               /* Высота футера */
+@footerLineHeight: 1.5;           /*Межстрочный интервал в футере*/
+@footerLinkColor: #ffffff;        /*Цвет ссылок в футере*/
+@footerLinkHoverColor: #000000;   /*Цвет ссылок при наведении в футере*/
+@footerPadding: 18px 0 0 0;       /*Отступы в футере*/
+@footerTopBorder: 1px solid #ffffff; /*Граница между блоками*/
+
+html,body{
+  height: 100%;
+  color:@bodyColor;
+  font: @font;
+  line-height: @lineHeight;
+}
+body {
+  background: @bodyBg;
+  min-width: 1200px;
+  h1{
+    margin-top: 1em;
+  }
+  .wrap{
+    min-width: 1200px;
+    max-width: @maxWidthWrap;
+    margin: 0 auto;
+    .units-container{
+      width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.65em;
+    }
+  }
+  a{
+    color:@linkColor;
+    font: @font;
+  }
+}
+
+p{
+  line-height: @lineHeight;
+}
+
+.component{
+  min-height: 445px;
+}
+.landing{
+  padding: 40px 0;
+
+  .widgettitle{
+    text-align: center;
+  }
+}
+
+.header{
+  background:@headerBg ;
+  .widget{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  p{
+    margin-bottom: 0;
+  }
+}
+.firstHeader{
+  background:@fHBg;
+  color:@fHColor;
+  min-height:@fHmHeight;
+  border-bottom: @fHBB;
+}
+.firstHeaderLeft{
+  padding: @fHLpadding;
+}
+.logo{
+  padding: @logoPadding;
+}
+
+.secondHead{
+  background:@secondHeader;
+  font-size:@secondHeaderFS;
+  line-height:@secondHeaderLH;
+  ul{
+    line-height: 40px;
+    li{
+      line-height: 40px !important;
+    }
+    a{
+      line-height: 35px !important;
+    }
+  }
+}
+.menu{
+  ul{
+    margin: 0;
+    list-style: none;
+    li{
+      position: relative;
+
+      ul{
+        z-index: 100;
+        position: absolute;
+        display: none;
+      }
+      &:hover {
+        ul{
+          display: block;
+          ul{
+            display: none;
+          }
+          li{
+            &:hover{
+              ul{
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.nav-v-left{
+  ul{
+    background: @menuV1Bg;
+    li{
+      line-height: 1.5;
+      padding: 5px 10px;
+      a{
+        color: @menuLinkVColor;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        line-height: 1.5;
+      }
+      ul{
+        width: @menuVWidth;
+        background: @menuV2Bg;
+        li{
+          ul{
+            background: @menuV3Bg;
+          }
+        }
+      }
+      &:hover{
+        background: @menuVBGHover;
+        ul{
+          right: -@menuVWidth;
+          top:0;
+        }
+      }
+
+    }
+  }
+}
+.nav-v-right{
+  ul{
+    background: @menuV1Bg;
+    li{
+      line-height: 1.5;
+      padding: 5px 10px;
+      a{
+        color: @menuLinkVColor;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        line-height: 1.5;
+      }
+      ul{
+        width: @menuVWidth;
+        background: @menuV2Bg;
+        li{
+          ul{
+            background: @menuV3Bg;
+          }
+        }
+      }
+      &:hover{
+        background: @menuVBGHover;
+        ul{
+          left: -@menuVWidth;
+          top:0;
+        }
+      }
+
+    }
+  }
+}
+.nav-h-left{
+  ul{
+    background: @menuH1Bg;
+    li {
+      float: left;
+      margin-right: 25px;
+      line-height: @menuLHSecond;
+      a {
+        text-decoration: none;
+        width: 100%;
+        display: inline-block;
+        border-bottom: @menuABorder;
+        line-height: @menuLHSecond;
+        color: @menuLinkHColor;
+      }
+      ul {
+        width: @menuHWidth;
+        background: @menuH2Bg;
+        li {
+          line-height: @menuLH;
+          a{
+            line-height: @menuLH;
+          }
+          ul {
+            background: @menuH3Bg;
+            right: -100%;
+            top: 0px;
+          }
+          width: 100%;
+          margin: 0;
+          padding: 10px;
+        }
+      }
+      &:hover{
+        a{
+          color: @menuLinkHColorHover;
+          border-bottom: @menuABorderHover;
+        }
+        ul {
+          li{
+            a{
+              color: @menuLinkHColor;
+              border-bottom: 0;
+            }
+            &:hover{
+              background: @menuHBGHover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.nav-h-right{
+  ul{
+    background: @menuH1Bg;
+    text-align: right;
+    li {
+      display: inline-block;
+      margin-left: 25px;
+      line-height: @menuLHSecond;
+      a {
+        text-decoration: none;
+        width: 100%;
+        display: inline-block;
+        border-bottom: @menuABorder;
+        line-height: @menuLHSecond;
+        color: @menuLinkHColor;
+      }
+      ul {
+        background: @menuH2Bg;
+        right: 0;
+        width: @menuHWidth;
+        border-top: @menuUlBorderTop;
+        li {
+          line-height: @menuLH;
+          a{
+            line-height: @menuLH;
+            color: @menuLinkHColor;
+          }
+          ul {
+            background: @menuH3Bg;
+            left: -100%;
+            top: 0px;
+            border-top: 0;
+            li{
+              a{
+              color: @menuLinkHColor;
+              }
+            }
+          }
+          width: 100%;
+          margin: 0;
+          padding: 10px;
+        }
+      }
+      &:hover{
+        a{
+          color: @menuLinkHColorHover;
+          border-bottom: @menuABorderHover;
+        }
+        ul {
+          li{
+            a{
+              color: @menuLinkHColor;
+              border-bottom: 0;
+            }
+            &:hover{
+              background: @menuHBGHover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.widget,.component{
+  margin-top: 1.65em;
+  margin-bottom: 1.65em;
+}
+/* slider =========== */
+.slider{
+  overflow: hidden;
+  background:@sliderBg;
+  .widget{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* topBlock */
+.topBlock{
+  overflow: hidden;
+  background: @topBlockBG;
+  .widget{
+    color:@topBlockColor;
+    .widgettitle{
+      color: @topBlockTitleColor;
+    }
+  }
+}
+/* blocks */
+.blocks{
+  overflow: hidden;
+  background:@blocksBg;
+  .widget{
+    color: @blocksColor;
+    .widgettitle{
+      color: @blocksTitleColor;
+    }
+  }
+}
+
+/* top */
+.top{
+  overflow: hidden;
+  background:@topBg;
+}
+/* mainContainer */
+.mainContainer{
+  overflow: hidden;
+  background:@mainContainerBg;
+  .left{
+    .widget{
+      background: @leftWidgetBackground;
+      padding: @leftWidgetPadding;
+      border-radius: @leftWidgetBorder-radius;
+      color:@leftWidgetColor;
+      .widgettitle{
+        color: @leftWidgetTitle;
+      }
+    }
+  }
+  .topMain{
+    .widget{
+      background: @topMainWidgetBackground;
+      padding: @topMainWidgetPadding;
+      border-radius: @topMainWidgetBorder-radius;
+      color:@topMainWidgetColor;
+      .widgettitle{
+        color: @topMainWidgetTitle;
+      }
+    }
+  }
+  .bottomMain{
+    .widget{
+      background: @bottomMainWidgetBackground;
+      padding: @bottomMainWidgetPadding;
+      border-radius: @bottomMainWidgetBorder-radius;
+      color:@bottomMainWidgetColor;
+      .widgettitle{
+        color: @bottomMainWidgetTitle;
+      }
+    }
+  }
+  .right{
+    .widget{
+      background: @rightWidgetBackground;
+      padding: @rightWidgetPadding;
+      border-radius: @rightWidgetBorder-radius;
+      color:@rightWidgetColor;
+      .widgettitle{
+        color: @rightWidgetTitle;
+      }
+    }
+  }
+}
+
+/*bottom*/
+.bottom{
+  overflow: hidden;
+  background:@bottomBg;
+  color: @bottomColor;
+  .widgettitle{
+    color: @bottomTitleColor;
+  }
+}
+/* blocksBottom */
+.blocksBottom{
+  overflow: hidden;
+  background:@blocksBottomBg;
+  color: @blocksBottomColor;
+  .widget{
+    .widgettitle{
+      color: @blocksBottomColorTitle;
+    }
+  }
+
+}
+/* footer */
+.blocksFooter{
+  overflow: hidden;
+  background:@footerBg;
+  height:@footerHeight;
+  line-height:@footerLineHeight;
+  border-top: @footerTopBorder;
+  color:@footerColor;
+  div{
+    height: 100%;
+  }
+  a{
+    color: @footerLinkColor;
+    &:hover{
+      color: @footerLinkHoverColor;
+    }
+  }
+}
+
+.breadcrumbs{
+  line-height: 40px;
+  ul{
+    line-height: 40px;
+  }
+}
+
+
+/*Styles for slider*/
+.wslider{
+  position: relative;
+  p{
+    margin-bottom: 0;
+  }
+}
+.wslider ul{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+
+}
+.wslider ul li{
+  height: 100%;
+}
+.slider-navigation{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+.slider-navigation a{
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+.slider-navigation-active div{
+  width: 6px;
+  height: 6px;
+  background: #505050;
+  border-radius: 50%;
+  margin: 2px 2px;
+}
+.slide-prev{
+  position: absolute;
+  left: 20px;
+  top:50%;
+  z-index: 10;
+  margin-top: -26px;
+  i{
+    color: #fff;
+    font-size: 56px;
+  }
+}
+.slide-next{
+  position: absolute;
+  right: 20px;
+  top:50%;
+  z-index: 10;
+  margin-top: -26px;
+  i{
+    color: #fff;
+    font-size: 56px;
+  }
+}
+.container-turn{
+  position: relative;
+  overflow: hidden;
+}
+.container-shading{
+  position: relative;
+  overflow: hidden;
+}
+.container-shading ul{
+  position: relative !important;
+}
+.container-shading .slide-active{
+  z-index: 10;
+}
+.slide-temp{
+  z-index: 8;
+}
+.slide-turn{
+  float: left;
+}
+.slide-shading{
+  position: absolute;
+  width: 100%;
+}
+/*End styles for slider*/
+.gallery{
+  text-align: center;
+  overflow: hidden;
+  background: #f7f7f7;
+  a{
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+  }
+}
+.photoItem{
+  width: 100%;
+  vertical-align: middle;
+}
+.photodesc{
+  border-top: 1px solid #ccc;
+  margin-top: 4.65em;
+  padding-top: 1.65em;
+}
+.pagination{
+  left: 0;
+  float: right;
+}

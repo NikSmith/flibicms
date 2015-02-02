@@ -1,0 +1,91 @@
+<form class="forms end" name="newpage">
+    <div class="units-row end">
+        <div class="unit-75">
+            <input type="hidden" name="editpage_csrf" ng-model="editPage.csrf" ng-init="editPage.csrf='<%- vars.csrf %>'"/>
+            <input type="hidden" name="editpage_id" ng-model="editPage.id" ng-init="editPage.id='<%- vars.page.id %>'"/>
+            <input type="hidden" name="edit" value="1"/>
+            <label>
+                Название материала
+                <span class="error" ng-show="submitted && newpage.title.$error.required">Необходимо указать название</span>
+                <span class="error" ng-show="submitted && (newpage.title.$error.minlength || newpage.title.$error.maxlength)">Не менее 5 и не более 200 символов</span>
+                <input type="text" ng-model="editPage.title" ng-init="editPage.title='<%- vars.page.title%>'" ng-class="(submitted && (newpage.title.$error.required || newpage.title.$error.minlength || newpage.title.$error.maxlength))?'input-error':''" ng-minlength="5" ng-maxlength="300" required  class="width-100"  name="title" value="<%- vars.page.title%>"/>
+            </label>
+            <label>
+                Заголовок страницы <span class="forms-desc"></span>
+                <input type="text" ng-model="editPage.pagetitle" ng-init="editPage.pagetitle='<%- vars.page.pagetitle%>'" class="width-100" name="pagetitle" value="<%- vars.page.pagetitle%>"/>
+            </label>
+            <label>
+                Родительский материал
+                <span class="error" ng-show="submitted && newpage.TreeId.$error.required">Выберите раздел</span>
+                <select class="width-50" name="parent" required ng-model="editPage.parent" ng-init="editPage.parent='<%-vars.parent.id%>'">
+                    <% for (var i=0; i<vars.pages.length; i++){ %>
+                        <option value="<%- vars.pages[i].id %>" offset-title="<%- vars.pages[i].title %>" offset-level="<%- vars.pages[i].NSLevel %>"></option>
+                    <% } %>
+                </select>
+            </label>
+            <label>
+                <textarea data-ui-tinymce id="tinymce1" ng-model="editPage.content" class="width-100" name="content" style="min-height: 350px" ng-init="editPage.content=''"><%- vars.page.content%></textarea>
+            </label>
+        </div>
+        <div class="unit-25">
+            <fieldset>
+                <legend>Настройки</legend>
+                <label>
+                    Публикация материала
+                    <select class="width-100" name="is_pub"  ng-model="editPage.is_pub" ng-init="editPage.is_pub='<%- vars.page.is_pub%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать заголовок
+                    <select class="width-100" name="showtitle" ng-model="editPage.showtitle" ng-init="editPage.showtitle='<%- vars.page.showtitle%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать контент
+                    <select class="width-100" name="showdesc" ng-model="editPage.showdesc" ng-init="editPage.showdesc='<%- vars.page.showdesc%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Вложенные материалы
+                    <select class="width-100" name="showchild" ng-model="editPage.showchild" ng-init="editPage.showchild='<%- vars.page.showchild%>'">
+                        <option value="1">Показывать</option>
+                        <option value="0">Скрыть</option>
+                    </select>
+                </label>
+                <label>
+                    Количество выводимых материалов
+                    <input type="text" class="width-25" name="prepage" ng-model="editPage.prepage" ng-init="editPage.prepage='<%- vars.page.prepage%>'"/>
+                </label>
+                <label>
+                    Шаблон
+                    <div class="input-groups width-100">
+                        <input type="text" name="template" ng-model="editPage.template" ng-init="editPage.template='<%- vars.page.template%>'"/><span class="input-append">.ejs</span>
+                    </div>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>SEO</legend>
+                <label>
+                    URL адрес страницы
+                    <span class="error" ng-show="submitted && newpage.slug.$error.required">Необходимо указать адрес страницы</span>
+                    <span class="error">{{ slugExists? 'Данный адрес уже используется':'' }}</span>
+                    <input type="text" ng-blur="checkSlugEdit(editPage.slug,<%-vars.page.id%>)" ng-model="editPage.slug" ng-init="editPage.slug='<%- vars.page.slug%>'"  required ng-class="(slugExists || (submitted && (newpage.slug.$error.required)))?'input-error':''" class="width-100 my-input" name="slug" value="<%- vars.page.slug%>"/>
+                </label>
+                <label>
+                    SEO ключи
+                    <input type="text" class="width-100" name="seokeys" ng-model="editPage.seokeys" ng-init="editPage.seokeys='<%- vars.page.seokeys%>'"/>
+                </label>
+                <label>
+                    SEO описание
+                    <textarea class="width-100" name="seodesc" ng-model="editPage.seodesc" ng-init="editPage.seodesc='<%- vars.page.seodesc%>'"></textarea>
+                </label>
+            </fieldset>
+        </div>
+    </div>
+</form>

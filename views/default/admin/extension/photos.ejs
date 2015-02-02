@@ -1,0 +1,278 @@
+<% if (_do == "viewall"){ %>
+    <div class="units-row end">
+        <div class="unit-100 block">
+            <table class="table-stripped table-bordered">
+                <thead>
+                <th>Название альбома</th>
+                <th class="width-20">Состояние</th>
+                <th class="width-10">Действие</th>
+                </thead>
+                <tbody>
+                    <% for (var i=0; i<albums.length; i++){%>
+                        <tr>
+                            <td><a href="/admin/extension/photos?do=viewalbum&id=<%-albums[i].id%>"><%-albums[i].title%></a></td>
+                            <td><% if (albums[i].enabled){ %>Включен<%} else {%>Отключен<%}%></td>
+                            <td>
+                                <a  class="btn btn-smaller btn-green btn_icon" href="javascript:editAlbum(<%-albums[i].id%>)" ><i class="fa fa-cog"></i></a>
+                                <a class="btn_icon btn btn-smaller btn-red" href="javascript:deleteAlbum(<%-albums[i].id%>)" ><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <a href="javascript:createAlbum()" class="btn btn-blue">Создать альбом</a>
+        </div>
+    </div>
+<% } %>
+<% if (_do == "createalbum"){ %>
+    <form id="createalbum" class="forms end" method="post" action="/admin/extension/photos">
+        <input name="csrf" type="hidden" value="<%- csrf %>"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <input name="do" type="hidden" value="createalbum"/>
+        <label>
+            Название альбома
+            <input type="text" class="width-100" name="title" value=""/>
+        </label>
+        <label>
+            Описание альбома
+            <textarea name="description" cols="20" rows="10"></textarea>
+        </label>
+        <label>
+            Состояние
+            <select name="enabled">
+                <option value="1">Включен</option>
+                <option value="0">Отключен</option>
+            </select>
+        </label>
+    </form>
+<% } %>
+<% if (_do == "editalbum"){ %>
+    <form id="editalbum" class="forms end" method="post" action="/admin/extension/photos">
+        <input name="csrf" type="hidden" value="<%- csrf %>"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <input name="id" type="hidden" value="<%- album.id %>"/>
+        <input name="do" type="hidden" value="editalbum"/>
+        <label>
+            Название альбома
+            <input type="text" class="width-100" name="title" value="<%- album.title %>"/>
+        </label>
+        <label>
+            Описание альбома
+            <textarea name="description" cols="20" rows="10"><%- album.description %></textarea>
+        </label>
+        <label>
+            Состояние
+            <select name="enabled">
+                <option value="1" <%if (album.enabled == 1){%>selected<%}%>>Включен</option>
+                <option value="0" <%if (album.enabled == 0){%>selected<%}%>>Отключен</option>
+            </select>
+        </label>
+    </form>
+<% } %>
+<% if (_do == "deletealbum"){ %>
+    <form id="deletealbum" class="end" action="/admin/extension/photos" method="post">
+        <input type="hidden" name="do" value="deletealbum"/>
+        <input name="csrf" type="hidden" value="<%-csrf%>"/>
+        <input name="id" type="hidden" value="<%-id%>"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <p>Вы действительно желаете удалить альбом и все его фотографии?</p>
+    </form>
+<% } %>
+<% if (_do == "viewalbum"){ %>
+    <div class="units-row end">
+        <div class="unit-100 block">
+            <table class="table-stripped table-bordered">
+                <thead>
+                <th>Название фотографии</th>
+                <th class="width-10">Состояние</th>
+                <th class="width-10">Действие</th>
+                </thead>
+                <tbody>
+                <% for (var i=0; i<photos.length; i++){%>
+                <tr>
+                    <td><%-photos[i].title%></td>
+                    <td>
+                        <% if (photos[i].enabled == 1){ %>
+                            Активна
+                        <% } else { %>
+                            Скрыта
+                        <% } %>
+                    </td>
+                    <td>
+                        <a  class="btn btn-smaller btn-green btn_icon" href="/admin/extension/photos?do=editphoto&id=<%-photos[i].id%>"><i class="fa fa-cog"></i></a>
+                        <a class="btn_icon btn btn-smaller btn-red" href="javascript:deletePhoto(<%-photos[i].id%>)" ><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+            <%-pagination%>
+            <a href="/admin/extension/photos?do=addphoto&id=<%-id%>" class="btn btn-blue">Добавить фото</a>
+        </div>
+    </div>
+<% } %>
+<% if (_do == "addphoto"){ %>
+    <form class="forms end" method="POST" action="/admin/extension/photos" enctype="multipart/form-data">
+        <input name="csrf" type="hidden" value="<%-csrf%>"/>
+        <input type="hidden" name="do" value="addphoto"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <input name="id" type="hidden" value="<%-id %>"/>
+        <label>
+            Название фото
+            <input type="text" class="width-100" name="title" value=""/>
+        </label>
+        <label>
+            Описание
+            <textarea name="description" cols="20"></textarea>
+        </label>
+        <label>
+            Порядок
+            <input type="text" class="width-20" name="sort" value="0"/>
+        </label>
+        <label>
+            Выберете фотографию
+            <input type="file" name="photo" id="fileupload1" multiple/>
+        </label>
+        <p class="text-centered"><input type="submit" class="btn btn-green" value="Создать"/></p>
+    </form>
+<% } %>
+<% if (_do == "editphoto"){ %>
+    <form class="forms end" method="post" action="/admin/extension/photos">
+        <input name="csrf" type="hidden" value="<%-csrf%>"/>
+        <input type="hidden" name="do" value="editphoto"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <input name="id" type="hidden" value="<%-id %>"/>
+        <div class="units-row end">
+            <div class="unit-35">
+                <img src="/uploads/photos/<%- photo.image %>" alt=""/>
+            </div>
+            <div class="unit-65">
+                <label>
+                    Название фотографии
+                    <input type="text" class="width-100" name="title" value="<%- photo.title %>"/>
+                </label>
+                <label>
+                    Порядок
+                    <input type="text" class="width-20" name="sort" value="<%- photo.sort %>"/>
+                </label>
+
+            </div>
+        </div>
+        <label>
+            Описание фотографии
+            <textarea name="description" rows="10"><%- photo.description %></textarea>
+        </label>
+        <p class="text-centered"><input type="submit" class="btn btn-green" value="Сохранить"/></p>
+    </form>
+<% } %>
+<% if (_do == "deletephoto"){ %>
+    <form id="deletephoto" class="end" action="/admin/extension/photos" method="post">
+        <input type="hidden" name="do" value="deletephoto"/>
+        <input name="csrf" type="hidden" value="<%-csrf%>"/>
+        <input name="id" type="hidden" value="<%-id%>"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <p>Вы действительно желаете удалить фотографию?</p>
+    </form>
+<% } %>
+<script>
+    function createAlbum(){
+        $.ajax({
+            url:"/admin/extension/photos?do=createalbum",
+            success: function(data){
+                modal({
+                    title: "Создание альбома",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Создать",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#createalbum").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function deleteAlbum(id){
+        $.ajax({
+            url:"/admin/extension/photos?do=deletealbum&id="+id,
+            success:function(data){
+                modal({
+                    title: "Удаление альбома",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deletealbum").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function editAlbum(id){
+        $.ajax({
+            url:"/admin/extension/photos?do=editalbum&id="+id,
+            success: function(data){
+                modal({
+                    title: "Редактирование альбома",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Сохранить",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#editalbum").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function deletePhoto(id){
+        $.ajax({
+            url: "/admin/extension/photos?do=deletephoto&id="+id,
+            success: function(data){
+                modal({
+                    title: "Удаление фотографии",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deletephoto").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+</script>

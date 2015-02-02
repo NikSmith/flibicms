@@ -1,0 +1,632 @@
+<% if (_do == "viewall"){ %>
+<div class="units-row end">
+    <div class="unit-100 block">
+        <table class="table-stripped table-bordered">
+            <thead>
+            <th>Название формы</th>
+            <th class="width-10">Действие</th>
+            </thead>
+            <tbody>
+            <% for (var i=0; i<forms.length; i++){%>
+            <tr>
+                <td><a href="/admin/extension/forms?do=editfields&id=<%-forms[i].id%>"><%-forms[i].title%></a></td>
+                <td>
+                    <a  class="btn btn-smaller btn-green btn_icon" href="javascript:editForm(<%-forms[i].id%>)" ><i class="fa fa-cog"></i></a>
+                    <a class="btn_icon btn btn-smaller btn-red" href="javascript:deleteForm(<%-forms[i].id%>)" ><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <%- pagination %>
+        <a href="javascript:createForm()" class="btn btn-blue">Создать форму</a>
+    </div>
+</div>
+<% } %>
+<% if (_do == "deleteform"){ %>
+<form id="deleteform" class="end" action="/admin/extension/forms" method="post">
+    <input type="hidden" name="do" value="deleteform"/>
+    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+    <input name="id" type="hidden" value="<%-id%>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <p class="end">Вы действительно желаете удалить форму?</p>
+</form>
+<%}%>
+<% if (_do == "createform"){ %>
+<form id="createform" class="forms end" action="/admin/extension/forms" method="post">
+    <input type="hidden" name="do" value="createform"/>
+    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <label>
+        Название формы
+        <input type="text" name="title" class="width-100"/>
+    </label>
+    <label>
+        Адрес почты для отправки формы
+        <input type="text" name="email" class="width-100"/>
+    </label>
+    <label>
+        Адрес обработчика формы
+        <input type="text" name="action" class="width-100" value="/api/forms"/>
+    </label>
+    <label>
+        Метод протокола HTTP
+        <select name="method" class="width-50">
+            <option value="post">POST</option>
+            <option value="get">GET</option>
+        </select>
+    </label>
+    <label>
+        Код счетчика Яндекс Метрики
+        <input type="text" name="yacode" class="width-100" value=""/>
+    </label>
+    <label>
+        Идентификатор цели
+        <input type="text" name="yatarget" class="width-100" value=""/>
+    </label>
+    <label>
+        Class
+        <input type="text" name="class" class="width-100" value="width-100"/>
+    </label>
+    <label>
+        Style
+        <input type="text" name="style" class="width-100" value="width:100%;"/>
+    </label>
+</form>
+<%}%>
+<% if (_do == "editform"){ %>
+<form id="editform" class="forms end" action="/admin/extension/forms" method="post">
+    <input type="hidden" name="do" value="editform"/>
+    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <input name="id" type="hidden" value="<%-form.id%>"/>
+    <label>
+        Название формы
+        <input type="text" name="title" class="width-100" value="<%-form.title%>"/>
+    </label>
+    <label>
+        Адрес почты для отправки формы
+        <input type="text" name="email" class="width-100" value="<%-form.email%>"/>
+    </label>
+    <label>
+        Адрес обработчика формы
+        <input type="text" name="action" class="width-100" value="<%-form.action%>"/>
+    </label>
+    <label>
+        Метод протокола HTTP
+        <select name="method" class="width-50">
+            <option value="post" <%if (form.method == "post"){%>selected<%}%>>POST</option>
+            <option value="get" <%if (form.method == "get"){%>selected<%}%>>GET</option>
+        </select>
+    </label>
+    <label>
+        Код счетчика Яндекс Метрики
+        <input type="text" name="yacode" class="width-100" value="<%-form.yacode%>"/>
+    </label>
+    <label>
+        Идентификатор цели
+        <input type="text" name="yatarget" class="width-100" value="<%-form.yatarget%>"/>
+    </label>
+    <label>
+        Class
+        <input type="text" name="class" class="width-100" value="<%-form.class%>"/>
+    </label>
+    <label>
+        Style
+        <input type="text" name="style" class="width-100" value="<%-form.style%>"/>
+    </label>
+</form>
+<%}%>
+<% if (_do == "editfields"){ %>
+    <div class="block" ng-controller="forms">
+            <div class="units-row forms">
+                <div class="unit-100 fields">
+                    <fieldset>
+                        <legend>Редактор полей</legend>
+                        <ul class="blocks-3">
+                            <li ng-show="field.tag != 'html' && field.type != 'checkbox' && field.tag != 'submit'">
+                                <label>
+                                    Имя поля
+                                    <input ng-class="(field.name.length == 0 && submitted)?'input-error':''" type="text" class="width-100" ng-model="field.name"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    Описание поля
+                                    <input type="text" class="width-100" ng-model="field.desc"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    Тип поля
+                                    <select class="width-100" ng-model="tag" ng-change="setTag()">
+                                        <option value="1">Текстовое поле</option>
+                                        <option value="2">Группа Checkbox</option>
+                                        <option value="3">Группа Radio</option>
+                                        <option value="4">Выпадающий список</option>
+                                        <option value="5">Множественный список</option>
+                                        <option value="6">Поле для текста</option>
+                                        <option value="7">Html код</option>
+                                        <option value="8">Кнопка отправки формы</option>
+                                    </select>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    Class
+                                    <input type="text" class="width-100" ng-model="field.class"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    Style
+                                    <input type="text" class="width-100" ng-model="field.style"/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    Обязательное поле
+                                    <input type="checkbox" ng-model="field.required"/>
+                                </label>
+                            </li>
+                        </ul>
+                        <fieldset ng-show="showParamPanel()">
+                            <legend>Элементы в группе</legend>
+                            <div class="units-row">
+                                <div class="unit-40">
+                                    <label ng-show="field.type == 'checkbox'">
+                                        Имя
+                                        <input ng-class="(data.name.length == 0 && submitted && field.data.length == 0)?'input-error':''" type="text" class="width-100 left" ng-model="data.name"/>
+                                    </label>
+                                    <label>
+                                        Значение
+                                        <input ng-class="(data.value.length == 0 && submitted && field.data.length == 0)?'input-error':''" type="text" class="width-100 left" ng-model="data.value"/>
+                                    </label>
+                                    <label>
+                                        Описание
+                                        <input ng-class="(data.title.length == 0 && submitted && field.data.length == 0)?'input-error':''" type="text" class="width-100 left" ng-model="data.title"/>
+                                    </label>
+                                    <a href="" ng-click="addParams()">{{buttonNameData}}</a>
+                                </div>
+                                <div class="unit-60">
+                                    <strong>Активные элементы</strong>
+                                    <p class='end' ng-repeat="item in field.data">
+                                        <small>Имя: {{item.name}} Значение: {{item.value}} Описание: {{item.title}}</small>
+                                        <a href='#' ng-click='editDataItem($index)'><i class='fa fa-pencil-square-o'></i></a>
+                                        <a href='#' ng-click='deleteDataItem($index)'><i class='fa fa-times'></i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="units-row end forms">
+                            <div class="unit-100 text-centered">
+                                <p><button class="btn btn-green width-20" ng-click="add()">{{buttonName}}</button></p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+        <div class="units-row end forms">
+            <div class="unit-40">
+                <fieldset>
+                    <legend>Поля формы</legend>
+                    <nav class="nav fieldlist">
+                        <ul>
+                            <li ng-repeat="item in fields">
+                                {{item.desc}}
+                                <a href='javascript:void(0)' ng-click='editField($index)'><i class='fa fa-pencil-square-o'></i></a>
+                                <a href='javascript:void(0)' ng-click='deleteField($index)'><i class='fa fa-times'></i></a>
+                                <a href='javascript:void(0)' ng-click='upField($index)'><i class="fa fa-arrow-up"></i></a>
+                                <a href='javascript:void(0)' ng-click='downField($index)'><i class="fa fa-arrow-down"></i></a>
+
+                            </li>
+                        </ul>
+                    </nav>
+                </fieldset>
+            </div>
+            <div class="unit-60">
+                <fieldset>
+                    <legend>Предварительный просмотр</legend>
+                    <form class="forms" ng-bind-html="getContent()"></form>
+                </fieldset>
+            </div>
+        </div>
+        <form id="editfields" action="/admin/extension/forms">
+            <input name="do" type="hidden" value="editfields"/>
+            <input name="id" type="hidden" value="<%-id%>"/>
+            <input name="sdo" type="hidden" value="1"/>
+            <input name="csrf" type="hidden" value="<%-csrf%>"/>
+            <input name="fields" id="datafields" type="hidden" value=""/>
+            <p><input type="submit" class="btn btn-green" value="Сохранить" ng-click="submit()"/></p>
+        </form>
+    </div>
+<script>
+adminApp.controller("forms",function($scope,$sce, $compile){
+    $scope.submitted= false;
+    $scope.tag= 1;
+    $scope.field = {};
+    $scope.buttonName = "";
+    $scope.buttonNameData = "Добавить";
+    $scope.editInd = -1;
+    $scope.formHtml = "";
+    $scope.fields = <%- form[0].fields%>;
+    $scope.data = {
+        title: "",
+        value:"",
+        name:""
+    };
+    $scope.submit = function(){
+        var fields = [];
+        $scope.fields.forEach(function(item){
+            var obj = {
+                tag:item.tag,
+                type:item.type,
+                data:[],
+                name:item.name,
+                desc:item.desc,
+                class:item.class,
+                style:item.style,
+                required:item.required
+            };
+            item.data.forEach(function(it){
+                obj['data'].push({
+                    name:it.name,
+                    value:it.value,
+                    title:it.title
+                });
+            });
+            fields.push(obj);
+        });
+        angular.element("#datafields").val(JSON.stringify(fields));
+        angular.element("#editfields").submit();
+    };
+    $scope.init = function(){
+        $scope.tag= 1;
+        $scope.field = {
+            tag:"input",
+            type:"text",
+            data:[],
+            name:"",
+            desc:"",
+            class:"width-100",
+            style:"width:100%;"
+        };
+        $scope.editInd = -1;
+        $scope.editDataInd = -1;
+        $scope.buttonName = "Добавить";
+        $scope.data = {
+            title: "",
+            value:"",
+            name:""
+        };
+    };
+    $scope.init();
+    $scope.refresh = function(){
+        $scope.formHtml = "";
+        (function repeat(x){
+            if (!$scope.fields.length){
+                return;
+            }
+            $scope.renderFieldHtml($scope.fields[x],function(){
+                x++;
+                if (x<$scope.fields.length){
+                    repeat(x);
+                }
+            })
+        })(0);
+    };
+    $scope.renderFieldHtml = function(obj,callback){
+        if (obj.tag == "textarea"){
+            $scope.formHtml+="" +
+                    "<label>"+obj.desc+"<textarea name='"+obj.name+"' class='"+obj.class+"' style='"+obj.style+"'>";
+            $scope.formHtml+="</textarea></label>";
+        }
+        else if (obj.tag == "input" && obj.type == "text"){
+            $scope.formHtml+="<label>"+obj.desc+"<input type='"+obj.type+"' class='"+obj.class+"' style='"+obj.style+"' name='"+obj.name+"' value='";
+            $scope.formHtml+="'/></label>";
+        }
+        else if (obj.tag == "input" && (obj.type == "checkbox" || obj.type == "radio")){
+            $scope.formHtml+="<label>"+obj.desc+"<ul class='"+obj.class+"'>";
+            for (var x = 0; x<obj.data.length; x++){
+                $scope.formHtml+='<li><input type="'+obj.type+'" name="';
+                if (obj.type == "checkbox"){
+                    $scope.formHtml+=obj.data[x].name;
+                }
+                else {
+                    $scope.formHtml+=obj.name;
+                }
+                $scope.formHtml+='" id="'+obj.data[x].name+'-'+x+'"><label for="'+obj.data[x].name+'-'+x+'">'+obj.data[x].title+'</label></li>';
+            }
+            $scope.formHtml+="</ul></label>";
+
+        }
+        else if (obj.tag == "select"){
+            $scope.formHtml+="<label>"+obj.desc+"<select class='"+obj.class+"' style='"+obj.style+"' ";
+
+            if (obj.type == "multiple"){
+                $scope.formHtml+="multiple";
+            }
+            $scope.formHtml+=" name='"+obj.name+"'>";
+            for (var i=0; i<obj.data.length;i++){
+                $scope.formHtml+="<option value='"+obj.data[i].value+"'";
+                $scope.formHtml+=">"+obj.data[i].title+"</option>";
+            }
+
+            $scope.formHtml+="</select></label>";
+        }
+        else if (obj.tag == "submit"){
+            $scope.formHtml+="<p><input type='submit' value='"+obj.desc+"' class='"+obj.class+"' style='"+obj.style+"'></p>";
+        }
+        else if (obj.tag == "html"){
+            $scope.formHtml+=obj.desc;
+        }
+        callback();
+    };
+    $scope.refresh();
+    $scope.addParams = function(){
+        var ind = $scope.editDataInd;
+        if ($scope.field.type != "radio" && $scope.field.type != "checkbox" && $scope.field.tag != "select"){
+            return;
+        }
+        $scope.submitted = true;
+        var obj = {
+            name: $scope.data.name,
+            title: $scope.data.title,
+            value: $scope.data.value
+        };
+        if (($scope.field.type == "radio" || $scope.field.type == "select") && (!obj.value || !obj.title)){
+            return;
+        }
+        if ($scope.field.type == "checkbox" && (!obj.name || !obj.value || !obj.title)){
+            return;
+        }
+
+        if (ind >= 0){
+            $scope.field.data.splice(ind,1,obj);
+        }
+        else {
+            $scope.field.data.push(obj);
+        }
+        $scope.buttonNameData = "Добавить";
+        $scope.editDataInd = -1;
+        $scope.data.name = "";
+        $scope.data.title = "";
+        $scope.data.value = "";
+        $scope.submitted = false;
+    };
+    $scope.showParamPanel = function(){
+        return $scope.field.type == "radio" || $scope.field.type == "checkbox" || $scope.field.tag == "select";
+    };
+    $scope.editDataItem = function(ind){
+        $scope.data = $scope.field.data[ind];
+        $scope.editDataInd = ind;
+        $scope.buttonNameData = "Сохранить";
+    };
+    $scope.deleteDataItem = function(ind){
+        $scope.field.data.splice(ind,1);
+    };
+    $scope.upField = function(ind){
+        if (ind == 0){
+            return;
+        }
+        var el = $scope.fields.splice(ind,1);
+        $scope.fields.splice(ind-1,0,el[0]);
+        $scope.refresh();
+    };
+    $scope.downField = function(ind){
+        var el = $scope.fields.splice(ind,1);
+        $scope.fields.splice(ind+1,0,el[0]);
+        $scope.refresh();
+    };
+    $scope.editField = function(ind){
+        $scope.field = $scope.fields[ind];
+        $scope.editInd = ind;
+        $scope.buttonName = "Сохранить";
+        switch ($scope.field.tag){
+            case "input":
+                if ($scope.field.type == "text"){
+                    $scope.tag= 1;
+                }
+                if ($scope.field.type == "checkbox"){
+                    $scope.tag= 2;
+                }
+                if ($scope.field.type == "radio"){
+                    $scope.tag= 3;
+                }
+                break;
+            case "select":
+                if ($scope.field.type == "multiple"){
+                    $scope.tag= 5;
+                }
+                else {
+                    $scope.tag= 4;
+                }
+                break;
+            case "textarea":
+                $scope.tag= 6;
+                break;
+            case "html":
+                $scope.tag= 7;
+                break;
+            case "button":
+                $scope.tag= 8;
+                break;
+            default :
+                return;
+                break;
+        }
+    };
+    $scope.deleteField = function(id){
+        $scope.fields.splice(id,1);
+        $scope.refresh();
+
+    };
+    $scope.getContent = function() {
+        return $sce.trustAsHtml($scope.formHtml);
+    };
+    $scope.add = function(){
+        $scope.submitted = true;
+        var err = false;
+        if (!$scope.field.desc && $scope.field.tag == "html"){
+            err = true;
+        }
+        if (!$scope.field.name && ($scope.field.tag != "html" && $scope.field.type != "checkbox" && $scope.field.tag != "submit")){
+            err = true;
+        }
+        if ($scope.field.data.length == 0 && ($scope.field.type == "checkbox" || $scope.field.type == "radio" || $scope.field.tag == "select")){
+            err = true;
+        }
+
+        if ($scope.field.type == "checkbox"){
+            for (var i=0; i<$scope.field.data.length; i++){
+                if (!$scope.field.data[i].name){
+                    err = true;
+                }
+            }
+        }
+
+        if (err == true){
+            return;
+        }
+
+        var ind = $scope.editInd;
+        var obj = {
+            tag:$scope.field.tag,
+            type:$scope.field.type,
+            name:$scope.field.name,
+            desc:$scope.field.desc,
+            data: $scope.field.data,
+            class:$scope.field.class,
+            style:$scope.field.style,
+            required:$scope.field.required
+        };
+        if (ind>=0){
+            $scope.fields.splice(ind,1,obj);
+        }
+        else {
+            $scope.fields.push(obj);
+        }
+
+        $scope.init();
+        $scope.refresh();
+        $scope.submitted = false;
+    };
+    $scope.setTag = function(){
+        switch ($scope.tag){
+            case "1":
+                $scope.field.tag = "input";
+                $scope.field.type = "text";
+                break;
+            case "2":
+                $scope.field.tag = "input";
+                $scope.field.type = "checkbox";
+                $scope.field.class = "forms-inline-list";
+                break;
+            case "3":
+                $scope.field.tag = "input";
+                $scope.field.type = "radio";
+                $scope.field.class = "forms-inline-list";
+                break;
+            case "4":
+                $scope.field.tag = "select";
+                $scope.field.type = "";
+                break;
+            case "5":
+                $scope.field.tag = "select";
+                $scope.field.type = "multiple";
+                break;
+            case "6":
+                $scope.field.tag = "textarea";
+                $scope.field.type = "";
+                break;
+            case "7":
+                $scope.field.tag = "html";
+                $scope.field.type = "";
+                break;
+            case "8":
+                $scope.field.tag = "submit";
+                $scope.field.type = "";
+                break;
+        }
+    }
+});
+</script>
+<%}%>
+<script>
+    function deleteForm(id){
+        $.ajax({
+            url: "/admin/extension/forms?do=deleteform&id="+id,
+            success: function(data){
+                modal({
+                    title: "Удаление формы",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deleteform").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function editForm(id){
+        $.ajax({
+            url: "/admin/extension/forms?do=editform&id="+id,
+            success: function(data){
+                modal({
+                    title: "Редактирование формы",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Сохранить",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#editform").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function createForm(){
+        $.ajax({
+            url: "/admin/extension/forms?do=createform",
+            success: function(data){
+                modal({
+                    title: "Создание новой формы",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Создать",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#createform").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+</script>

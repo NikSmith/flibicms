@@ -1,0 +1,40 @@
+<% if (_do =="viewphoto"){ %>
+    <div class="units-row">
+        <div class="unit-100 text-centered">
+            <img id="photo_<%- photo.image%>" src="/uploads/photos/<%- photo.image%>" alt=""/>
+        </div>
+    </div>
+    <div class="units-row photodesc end">
+        <div class="unit-100">
+            <div class="width-100 h2"><%- photo.title %></div>
+            <div class="width-100"><%- photo.description %></div>
+        </div>
+    </div>
+<% } %>
+
+<% if (_do =="getpage"){ %>
+    <ul class="blocks-<%-cols%>">
+        <% for (var x=0; x<photos.length; x++){%>
+        <li class="gallery" style="height: <%-height%>px; line-height: <%-height%>px;">
+            <a href="javascript:viewPhoto(<%- photos[x].id%>)" style="height: <%-height%>px; line-height: <%-height%>px;">
+                <img src="/uploads/photos/thumbs/<%- photos[x].image%>" class="photoItem" alt="<%- photos[x].title%>"/>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+    <% if (pages>1){ %>
+    <div class="units-row">
+        <div class="unit-100">
+            <ul class="pagination">
+                <% if (page>1){ %>
+                <li><a href="javascript:gallery(<%-album%>,<%-parseInt(page)-1%>)">&larr;</a></li>
+                <% } %>
+                <li><span><%-page%> из <%-pages%></span></li>
+                <% if (page<pages){ %>
+                <li><a href="javascript:gallery(<%-album%>,<%-parseInt(page)+1%>)">&rarr;</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <% } %>
+<% } %>

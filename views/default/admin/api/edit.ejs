@@ -1,0 +1,40 @@
+<form class="forms" name="apiEdit">
+    <% if(vars.router){%>
+    <input type="hidden" ng-model="router.id" ng-init="router.id='<%-vars.router.id%>'"/>
+    <%}%>
+    <input type="hidden" ng-model="router.csrf" ng-init="router.csrf='<%-vars.csrf%>'"/>
+    <label>
+        Название <span ng-show="submitted && apiEdit.title.$error.required" class="error">Укажите название роутера</span>
+        <input type="text" ng-model="router.title" required class="width-100" name="title" <% if(vars.router){%>ng-init="router.title='<%-vars.router.title%>'"<%}%> />
+    </label>
+    <% if(!vars.router){%>
+        <label>
+            Ссылка <span ng-show="submitted && apiEdit.name.$error.required" class="error">Укажите адрес роутера</span>
+            <span ng-show="submitted && apiEdit.name.$error.pattern" class="error">Только латинские символы</span>
+            <input type="text" ng-model="router.alias" class="width-100" ng-pattern="/^[a-zA-Z]+$/" required name="name" />
+        </label>
+    <%}%>
+    <label>
+        Доступ по IP <span ng-show="submitted && apiEdit.ip.$error.pattern" class="error">Неверный формат IP</span>
+        <input type="text" ng-model="router.ip" ng-pattern="/^(([0-9|*]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9|*]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/" class="width-100" name="ip" <% if(vars.router){%>ng-init="router.ip='<%-vars.router.ip%>'"<%}%> placeholder="*.*.*.*"/>
+    </label>
+    <label>
+        Доступен для следующих групп
+        <select name="usergroup"  multiple="multiple" size="5" ng-model="router.usergroup" <% if(vars.router){%>ng-init='router.usergroup=<%- JSON.stringify(vars.router.usergroup)%>'<%}%> >
+            <% for(var i=0; i<vars.groups.length; i++){%>
+            <option value="<%- vars.groups[i].role %>" selected><%- vars.groups[i].title %></option>
+            <% } %>
+        </select>
+    </label>
+    <label>
+        Токен <span class="forms-desc">Оставьте пустым если не требуется</span>
+        <input type="text" ng-model="router.token" class="width-100" ng-init="router.token=''"/>
+    </label>
+    <label>
+        Состояние
+        <select name="enabled" ng-model="router.enabled" ng-init="router.enabled = <% if(vars.router){%><%-vars.router.enabled%><%}else{%>1<%}%>" >
+            <option value="1">Включен</option>
+            <option value="0">Выключен</option>
+        </select>
+    </label>
+</form>

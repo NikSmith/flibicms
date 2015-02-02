@@ -1,0 +1,52 @@
+<div class="widget">
+    <% if (vars.title){ %>
+        <div class="widgettitle h3"><%-vars.title%></div>
+    <%}%>
+    <% if (vars.body){ %>
+        <div class="widgetbody"><%-vars.body%></div>
+    <%}%>
+    <form id="form_<%-vars.form.id%>" method="<%-vars.form.method%>" action="<%-vars.form.action%>" class="<%-vars.form.class%>" style="<%-vars.form.style%>">
+        <input name="formid" type="hidden" value="<%-vars.form.id%>"/>
+        <%- vars.fields%>
+    </form>
+</div>
+<script>
+    $("#form_<%-vars.form.id%>").on("submit",function(event){
+
+        $.ajax({
+            url: "<%-vars.form.action%>",
+            method: "<%-vars.form.method%>",
+            data:$("#form_<%-vars.form.id%>").serialize(),
+            success: function(data){
+                if (data.length){
+                    modal({
+                        title: "Отправка формы",
+                        content: {html: "Не все поля были заполнены. Укажите необходимые данные и попробуйте снова"},
+                        buttons:[
+                            {
+                                title:"Закрыть",
+                                class: "btn btn-green",
+                                click: function(){this.close();}
+                            }
+                        ]
+                    });
+                }
+                else {
+                    modal({
+                        title: "Отправка формы",
+                        content: {html: "Данные успешно отправлены"},
+                        buttons:[
+                            {
+                                title:"Закрыть",
+                                class: "btn btn-green",
+                                click: function(){this.close();}
+                            }
+                        ]
+                    });
+                    $('#form_<%-vars.form.id%>').trigger( 'reset' );
+                }
+            }
+        });
+        event.preventDefault();
+    });
+</script>

@@ -1,0 +1,90 @@
+<form class="forms end" name="editgroups" ng-init="submitted = false">
+    <div class="units-row end">
+        <div class="unit-75">
+            <input type="hidden" ng-model="egroup.csrf" ng-init="egroup.csrf='<%- vars.csrf%>'"/>
+            <label>
+                Название группы
+                <span class="error" ng-show="submitted && editgroups.title.$error.required">Необходимо указать название</span>
+                <span class="error" ng-show="submitted && (editgroups.title.$error.minlength || editgroups.title.$error.maxlength)">Не менее 5 и не более 200 символов</span>
+                <input type="text" name="title" ng-class="(submitted && (editgroups.title.$error.required || editgroups.title.$error.minlength || editgroups.title.$error.maxlength))?'input-error':''" ng-minlength="5" ng-maxlength="300" required  class="width-100" ng-model="egroup.title" ng-init="egroup.title='<%if (vars.group){%><%-vars.group.title%><%}%>'" <%if (!vars.group){%>ng-change='inputTitleGroup()'<%}%>/>
+            </label>
+            <label>
+                Заголовок страницы
+                <input type="text" class="width-100" ng-model="egroup.pagetitle" ng-init="egroup.pagetitle='<%if (vars.group){%><%-vars.group.pagetitle%><%}%>'"/>
+            </label>
+            <label>
+                URL адрес
+                <span class="error" ng-show="submitted && editgroups.slug.$error.required">Необходимо указать адрес страницы</span>
+                <span class="error">{{slugExists? 'Данный адрес уже используется':'' }}</span>
+                <input type="text" ng-pattern="/[a-z]/" ng-class="(submitted && editgroups.slug.$error.required)?'input-error':''" name="slug" ng-blur="checkGroup(<%if (vars.group){%>ctype<%}else{%>0<%}%>,egroup.slug)" required class="width-50 my-input" ng-model="egroup.slug" ng-init="egroup.slug='<%if (vars.group){%><%-vars.group.ctype%><%}%>'"/>
+            </label>
+            <label>
+                Контент
+                <textarea data-ui-tinymce id="tinywidget" class="width-100" ng-model="egroup.content"><%if (vars.group){%><%-vars.group.content%><%}%></textarea>
+            </label>
+        </div>
+        <div class="unit-25">
+            <fieldset>
+                <legend>Настройки</legend>
+                <label>
+                    Публикация группы
+                    <select class="width-100" ng-model="egroup.is_pub" ng-init="egroup.is_pub='<%if (vars.group){%><%-vars.group.is_pub%><%} else {%>1<%}%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <%if (!vars.group){%>
+                <label>
+                    Создать пункт меню
+                    <select class="width-100" name="is_pub" ng-model="egroup.menu" ng-init="egroup.menu=0">
+                        <option value="0">---</option>
+                        <option ng-repeat="item in menuGroups" value="{{item.id}}">{{item.title}}</option>
+                    </select>
+                </label>
+                <%}%>
+                <label>
+                    Отображать заголовок
+                    <select class="width-100" ng-model="egroup.showtitle" ng-init="egroup.showtitle='<%if (vars.group){%><%-vars.group.showtitle%><%} else {%>1<%}%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать контент
+                    <select class="width-100" ng-model="egroup.showdesc" ng-init="egroup.showdesc='<%if (vars.group){%><%-vars.group.showdesc%><%} else {%>1<%}%>'">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Вложенные материалы
+                    <select class="width-100" ng-model="egroup.showchild" ng-init="egroup.showchild='<%if (vars.group){%><%-vars.group.showchild%><%} else {%>1<%}%>'">
+                        <option value="1">Показывать</option>
+                        <option value="0">Скрыть</option>
+                    </select>
+                </label>
+                <label>
+                    Количество выводимых материалов
+                    <input type="text" class="width-25" name="prepage" ng-model="egroup.prepage" ng-init="egroup.prepage='<%if (vars.group){%><%-vars.group.prepage%><%} else {%>10<%}%>'"/>
+                </label>
+                <label>
+                    Шаблон
+                    <div class="input-groups width-100">
+                        <input type="text" name="template" ng-model="egroup.template" ng-init="egroup.template='<%if (vars.group){%><%-vars.group.template%><%}%>'"/><span class="input-append">.ejs</span>
+                    </div>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>SEO</legend>
+                <label>
+                    SEO ключи
+                    <input type="text" class="width-100" ng-model="egroup.seokeys" ng-init="egroup.seokeys='<%if (vars.group){%><%-vars.group.seokeys%><%}%>'"/>
+                </label>
+                <label>
+                    SEO описание
+                    <textarea class="width-100" ng-model="egroup.seodesc" ng-init="egroup.seodesc='<%if (vars.group){%><%-vars.group.seodesc%><%}%>'"></textarea>
+                </label>
+            </fieldset>
+        </div>
+    </div>
+</form>

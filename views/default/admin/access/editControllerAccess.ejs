@@ -1,0 +1,12 @@
+<div class="forms">
+    <input type="hidden" name="c_csrf" value="<%-vars.csrf%>"/>
+    <input type="hidden" name="c_id" value="<% if (vars.controller){ %><%= vars.controller.id %><% } %>"/>
+    <label>
+        Доступен для следующих групп
+        <select name="c_usergroup"  multiple="multiple" size="10">
+            <% for(var i=0; i<vars.groups.length; i++){%>
+            <option value="<%- vars.groups[i].role %>" <%if (vars.controller.usergroup.indexOf(vars.groups[i].role) !=-1){%>selected<%}%>><%- vars.groups[i].title %></option>
+            <% } %>
+        </select>
+    </label>
+</div>

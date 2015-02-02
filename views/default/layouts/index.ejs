@@ -1,0 +1,280 @@
+<%
+    var block = 0;
+    var bottomBlock = 0;
+
+    if (pos.block1.length) {
+        block +=1;
+    }
+    if (pos.block2.length) {
+        block +=1;
+    }
+    if (pos.block3.length) {
+        block +=1;
+    }
+    if (pos.block4.length) {
+        block +=1;
+    }
+    block = parseInt(100/block);
+    if (pos.bottomBlock1.length) {
+        bottomBlock +=1;
+    }
+    if (pos.bottomBlock2.length) {
+        bottomBlock +=1;
+    }
+    if (pos.bottomBlock3.length) {
+        bottomBlock +=1;
+    }
+    if (pos.bottomBlock4.length) {
+        bottomBlock +=1;
+    }
+    bottomBlock = parseInt(100/bottomBlock);
+
+    var wBody = 50;
+    if (!pos.left.length){
+        wBody+=25;
+    }
+    if (!pos.right.length){
+        wBody+=25;
+    }
+
+%>
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title><%= title %></title>
+        <%- metadesc %>
+        <%- keywords %>
+        <script src="/js/jquery.min.js"></script>
+        <% for(var item in header){ %>
+        <%- header[item] %>
+        <% } %>
+        <link rel="stylesheet" href="/css/kube.css"/>
+        <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+        <link rel="stylesheet/less" type="text/css" href="/less/styles.less"/>
+        <script src="/js/less.min.js"></script>
+        <script type="text/javascript" src="/js/jq.watson.js"></script>
+        <script type="text/javascript" src="/system/js/core.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="wrap">
+                <div class="header">
+                    <div class="firstHeader">
+                        <div class="units-container">
+                            <div class="units-row end">
+                                <div class="unit-25 logo">
+                                    <%- pos.logo.join(""); %>
+                                </div>
+                                <div class="unit-75 firstHeaderLeft">
+                                    <div class="units-row end">
+                                        <div class="unit-40 unit-push-20 centerHead">
+                                            <%- pos.centerHead.join(""); %>
+                                        </div>
+
+                                        <div class="unit-40 unit-push-right rightHead">
+                                            <%- pos.rightHead.join(""); %>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="units-row end bottomHead">
+                                        <div class="unit-100">
+                                            <%- pos.bottomHead.join(""); %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="secondHead">
+                        <div class="units-container">
+                            <div class="units-row end">
+                                <div class="unit-100">
+                                    <%- pos.secondHead.join(""); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <section>
+            <div class="wrap">
+                <div class="slider">
+                    <%- pos.slider.join(""); %>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap">
+                <div class="topBlock">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <div class="unit-100">
+                                <%- pos.topBlock.join(""); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap">
+                <div class="blocks">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <% if (pos.block1.length){ %>
+                                <div class="unit-<%-block%>">
+                                    <%- pos.block1.join(""); %>
+                                </div>
+                            <% } %>
+
+                            <% if (pos.block2.length){ %>
+                                <div class="unit-<%-block%>">
+                                    <%- pos.block2.join(""); %>
+                                </div>
+                            <% } %>
+                            <% if (pos.block3.length){ %>
+                                <div class="unit-<%-block%>">
+                                    <%- pos.block3.join(""); %>
+                                </div>
+                            <% } %>
+                            <% if (pos.block4.length){ %>
+                                <div class="unit-<%-block%>">
+                                    <%- pos.block4.join(""); %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="wrap">
+                <div class="top">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <div class="unit-100">
+                                <%- pos.top.join(""); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap">
+                <div class="mainContainer">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <% if (pos.left.length){ %>
+                                <div class="unit-25 left">
+                                    <%- pos.left.join(""); %>
+                                </div>
+                            <% } %>
+                            <div class="unit-<%- wBody%> center">
+                                <div class="width-100 topMain">
+                                    <%- pos.topMain.join(""); %>
+                                </div>
+                                <% if (body) { %>
+                                <div class="width-100 component">
+                                    <%- body %>
+                                </div>
+                                <% } %>
+                                <div class="width-100 bottomMain">
+                                    <%- pos.bottomMain.join(""); %>
+                                </div>
+                            </div>
+                            <% if (pos.right.length){ %>
+                                <div class="unit-25 right">
+                                    <%- pos.right.join(""); %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="wrap">
+                <div class="bottom">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <div class="unit-100">
+                                <%- pos.bottom.join(""); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="wrap">
+                <div class="blocksBottom">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <% if (pos.bottomBlock1.length){ %>
+                                <div class="unit-<%-bottomBlock%>">
+                                    <%- pos.bottomBlock1.join(""); %>
+                                </div>
+                            <% } %>
+                            <% if (pos.bottomBlock2.length){ %>
+                                <div class="unit-<%-bottomBlock%>">
+                                    <%- pos.bottomBlock2.join(""); %>
+                                </div>
+                            <% } %>
+                            <% if (pos.bottomBlock3.length){ %>
+                                <div class="unit-<%-bottomBlock%>">
+                                    <%- pos.bottomBlock3.join(""); %>
+                                </div>
+                            <% } %>
+                            <% if (pos.bottomBlock4.length){ %>
+                                <div class="unit-<%-bottomBlock%>">
+                                    <%- pos.bottomBlock4.join(""); %>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="wrap">
+                <div class="blocksFooter">
+                    <div class="units-container">
+                        <div class="units-row end">
+                            <div class="unit-25 blockFooter">
+                                <%- pos.footerBlock1.join(""); %>
+                            </div>
+
+                            <div class="unit-25 blockFooter">
+                                <%- pos.footerBlock2.join(""); %>
+                            </div>
+
+                            <div class="unit-25 blockFooter">
+                                <%- pos.footerBlock3.join(""); %>
+                            </div>
+
+                            <div class="unit-25 blockFooter">
+                                <%- pos.footerBlock4.join(""); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+

@@ -1,0 +1,10 @@
+[
+    {
+        "tag" : "select",
+        "name": "slider_id",
+        "desc": "Слайдер",
+        "class": "width-100",
+        "data":"ext_slider#id#title#slider_id=0"
+    }
+]
+

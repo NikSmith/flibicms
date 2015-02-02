@@ -1,0 +1,51 @@
+<div class="units-row" ng-controller="navigation">
+    <div class="unit-20 block">
+        <div class="forms forms-inline">
+            <h5>Группы меню</h5>
+            <nav class="nav end">
+                <ul class="menuList">
+                    <li ng-repeat="item in groups" class="btn btn-small width-100" ng-click="getItems(item.id)" ng-class="(group.id && group.id == item.id)?'btn-blue':''">
+                        {{item.title}}
+                    </li>
+                    <li class="btn btn-small btn-green width-100" ng-click="createGroup()">Создать группу</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="forms forms-inline" ng-show="!info">
+            <h5>Управление группой</h5>
+            <ul class="menuList">
+                <li class="btn btn-small width-100" ng-click="createItem()">Добавить пункт меню</li>
+                <li class="btn btn-small width-100" ng-click="editGroup()">Редактировать группу</li>
+                <li class="btn btn-small btn-red width-100" ng-click="deleteGroup()">Удалить группу</li>
+            </ul>
+        </div>
+    </div>
+    <div class="unit-80 block content">
+        <div>
+            <table class="table-stripped table-bordered">
+                <thead>
+                <th>Название пункта</th>
+                <th class="width-30">Адрес</th>
+                <th class="text-centered width-10">Вкл</th>
+                <th class="text-centered width-10">Порядок</th>
+                <th class="width-10">Действие</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in menuLists | filter:{ NSLevel: '!0'}">
+                    <td  offset-title="{{item.title}}" offset-level="{{item.NSLevel}}"></td>
+                    <td>{{item.url}}</td>
+                    <td class="text-centered">{{item.enabled}}</td>
+                    <td class="text-centered">
+                        <button class="btn btn-smaller btn_icon" ng-click="pushItem($index,0,false)"><i class="fa fa-arrow-up"></i></button>
+                        <button class="btn btn-smaller btn_icon" ng-click="pushItem($index,0,true)"><i class="fa fa-arrow-down"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-smaller btn-green btn_icon" ng-click="editItem(item.id)"><i class="fa fa-cog"></i></button>
+                        <button class="btn_icon btn btn-smaller btn-red" ng-click="deleteItem(item.id)"><i class="fa fa-times"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

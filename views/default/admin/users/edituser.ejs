@@ -1,0 +1,41 @@
+<div class="forms" id="regUser">
+    <input type="hidden" name="u_csrf" value="<%-vars.csrf%>"/>
+    <input type="hidden" name="u_id" value="<% if (vars.user){ %><%= vars.user.id %><% } %>"/>
+    <label>
+        Логин <span id="err_login" class="error"></span>
+        <input type="text" class="width-100" name="u_login" value="<% if (vars.user){ %><%= vars.user.login %><% } %>"/>
+    </label>
+    <label>
+        Пароль <span id="err_pass" class="error"></span>
+        <input type="password" class="width-100" name="u_pass" value=""/>
+    </label>
+    <label>
+        Имя <span id="err_name" class="error"></span>
+        <input type="text" class="width-100" name="u_name" value="<% if (vars.user){ %><%= vars.user.name %><% } %>"/>
+    </label>
+    <label>
+        E-mail  <span id="err_email" class="error"></span>
+        <input type="text" class="width-100" name="u_email" value="<% if (vars.user){ %><%= vars.user.email %><% } %>"/>
+    </label>
+    <label>
+        Группа <span id="err_usergroup" class="error"></span>
+        <select name="u_usergroup">
+            <% for(var i=0; i<vars.groups.length; i++){ %>
+                <option value="<%- vars.groups[i]['id'] %>" <% if (vars.user && vars.user.usergroup == vars.groups[i]['id']){ %>selected<% } %>><%- vars.groups[i]['title'] %></option>
+            <% } %>
+        </select>
+    </label>
+    <label>
+        Состояние
+        <select name="u_isbanned">
+            <option value="0" <% if (vars.user && vars.user.is_banned == '0'){ %>selected<% } %>>Активен</option>
+            <option value="1" <% if (vars.user && vars.user.is_banned == '1'){ %>selected<% } %>>Заблокирован</option>
+        </select>
+    </label>
+    <script>
+        $("#regUser input").on("input",function(){
+            var el = "#err_"+this.name.substr(2,this.name.length);
+            $(el).text("");
+        });
+    </script>
+</div>

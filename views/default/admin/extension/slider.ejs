@@ -1,0 +1,426 @@
+<% if (_do == "viewall"){ %>
+<div class="units-row end">
+    <div class="unit-100 block">
+        <table class="table-stripped table-bordered">
+            <thead>
+            <th>Название слайдера</th>
+            <th class="width-10">Действие</th>
+            </thead>
+            <tbody>
+                <% for (var i=0; i<sliders.length; i++){%>
+                    <tr>
+                        <td><a href="/admin/extension/slider?do=viewslider&id=<%-sliders[i].id%>"><%-sliders[i].title%></a></td>
+                        <td>
+                            <a  class="btn btn-smaller btn-green btn_icon" href="javascript:editSlider(<%-sliders[i].id%>)" ><i class="fa fa-cog"></i></a>
+                            <a class="btn_icon btn btn-smaller btn-red" href="javascript:deleteSlider(<%-sliders[i].id%>)" ><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <a href="javascript:createSlider()" class="btn btn-blue">Создать слайдер</a>
+    </div>
+</div>
+<% } %>
+<% if (_do == "editslider"){ %>
+<form id="editslider" class="forms" method="post" action="/admin/extension/slider">
+    <input name="csrf" type="hidden" value="<%- csrf %>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <input name="id" type="hidden" value="<%- slider.id %>"/>
+    <input name="do" type="hidden" value="editslider"/>
+    <label>
+        Название слайдера
+        <input type="text" class="width-100" name="title" value="<%- slider.title %>"/>
+    </label>
+    <label>
+        Ширина слайдера
+        <input type="text" class="width-100" name="width" value="<%- slider.width %>"/>
+    </label>
+    <label>
+        Высота слайдера
+        <input type="text" class="width-100" name="height" value="<%- slider.height %>"/>
+    </label>
+    <label>
+        Тип анимации
+        <select name="animation">
+            <option value="turn" <% if (slider.title == "turn"){%>selected<%}%>>Перелистывание</option>
+            <option value="shading" <% if (slider.title == "shading"){%>selected<%}%>>Затухание</option>
+        </select>
+    </label>
+    <label>
+        Время показа слайда (сек)
+        <input type="text" name="playspeed" value="<%- slider.playspeed/1000 %>"/>
+    </label>
+    <label>
+        Пагинация слайдов
+        <select name="pagination">
+            <option value="1" <% if (slider.pagination == 1){%>selected<%}%>>Показывать</option>
+            <option value="0" <% if (slider.pagination == 0){%>selected<%}%>>Скрыть</option>
+        </select>
+    </label>
+    <label>
+        Кнопки навигации
+        <select name="navigation">
+            <option value="1" <% if (slider.navigation == 1){%>selected<%}%>>Показывать</option>
+            <option value="0" <% if (slider.navigation == 0){%>selected<%}%>>Скрыть</option>
+        </select>
+    </label>
+</form>
+<% } %>
+<% if (_do == "createslider"){ %>
+<form id="createslider" class="forms" method="post" action="/admin/extension/slider">
+    <input name="csrf" type="hidden" value="<%- csrf %>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <input name="do" type="hidden" value="createslider"/>
+    <label>
+        Название слайдера
+        <input type="text" class="width-100" name="title" value=""/>
+    </label>
+    <label>
+        Ширина слайдера
+        <input type="text" class="width-100" name="width" value="1200"/>
+    </label>
+    <label>
+        Высота слайдера
+        <input type="text" class="width-100" name="height" value="400"/>
+    </label>
+    <label>
+        Тип анимации
+        <select name="animation">
+            <option value="turn">Перелистывание</option>
+            <option value="shading">Затухание</option>
+        </select>
+    </label>
+    <label>
+        Время показа слайда (сек)
+        <input type="text" name="playspeed" value="7"/>
+    </label>
+    <label>
+        Пагинация слайдов
+        <select name="pagination">
+            <option value="1">Показывать</option>
+            <option value="0">Скрыть</option>
+        </select>
+    </label>
+    <label>
+        Кнопки навигации
+        <select name="navigation">
+            <option value="1">Показывать</option>
+            <option value="0">Скрыть</option>
+        </select>
+    </label>
+</form>
+<% } %>
+<% if (_do == "deleteslider"){ %>
+<form id="deleteslider" action="/admin/extension/slider" method="post">
+    <input type="hidden" name="do" value="deleteslider"/>
+    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+    <input name="id" type="hidden" value="<%-id%>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <p>Вы действительно желаете удалить слайдер и все слайды?</p>
+</form>
+<% } %>
+<% if (_do == "createslide"){ %>
+    <form class="forms" method="post" action="/admin/extension/slider">
+            <div class="units-row end">
+                <div class="unit-50">
+                    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+                    <input type="hidden" name="do" value="createslide"/>
+                    <input name="sdo" type="hidden" value="1"/>
+                    <input name="id" type="hidden" value="<%-id %>"/>
+                    <label>
+                        Название слайда
+                        <input type="text" class="width-100" name="title" value=""/>
+                    </label>
+                    <label>
+                        Порядок
+                        <input type="text" class="width-20" name="sort" value="0"/>
+                    </label>
+                </div>
+                <div class="unit-50">
+                    <input type="file" id="fileupload"  style="visibility: hidden; width:0px; height: 0px"/>
+                    Фоновое изображение
+                    <label class="input-groups">
+                        <input type="text" name="image" placeholder="#ffffff"/>
+                        <span class="btn-append">
+                            <button class="btn" onclick="$('#fileupload').click(); return false;">Загрузить</button>
+                        </span>
+                    </label>
+                    Положение фона
+                    <ul class="forms-inline-list">
+                        <li>
+                            <input type="text" name="height" size="3" value="50"/>
+                        </li>
+                        <li>
+                            <input type="text" name="width" size="3"  value="50"/>
+                        </li>
+                            <input type="text" name="repeat" size="8"  value="no-repeat"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <label>
+            Содержание слайда
+            <textarea name="content" id="slideRedactor" style="min-height: 250px"></textarea>
+        </label>
+        <p class="text-centered"><input type="submit" class="btn btn-green" value="Создать"/></p>
+        <script>
+            $(document).ready(function(){
+                initEditor("slideRedactor");
+            });
+        </script>
+    </form>
+<% } %>
+<% if (_do == "editslide"){ %>
+<form class="forms" method="post" action="/admin/extension/slider">
+    <div class="units-row end">
+        <div class="unit-50">
+            <input name="csrf" type="hidden" value="<%-csrf%>"/>
+            <input type="hidden" name="do" value="editslide"/>
+            <input name="sdo" type="hidden" value="1"/>
+            <input name="id" type="hidden" value="<%-id %>"/>
+            <label>
+                Название слайда
+                <input type="text" class="width-100" name="title" value="<%- slide.title %>"/>
+            </label>
+            <label>
+                Порядок
+                <input type="text" class="width-20" name="sort" value="<%- slide.sort %>"/>
+            </label>
+        </div>
+        <div class="unit-50">
+            <input type="file" id="fileupload"  style="visibility: hidden; width:0px; height: 0px"/>
+            Фоновое изображение
+            <label class="input-groups">
+                <input type="text" name="image" placeholder="#ffffff" value="<%- slide.background %>"/>
+                        <span class="btn-append">
+                            <button class="btn" onclick="$('#fileupload').click(); return false;">Загрузить</button>
+                        </span>
+            </label>
+            Положение фона
+            <ul class="forms-inline-list">
+                <li>
+                    <input type="text" name="width" size="3" value="<%- slide.width %>"/>
+                </li>
+                <li>
+                    <input type="text" name="height" size="3"  value="<%- slide.height %>"/>
+                </li>
+                <input type="text" name="repeat" size="8"  value="<%- slide.repeat %>"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <label>
+        Содержание слайда
+        <textarea name="content" id="slideRedactor" style="min-height: 250px"><%- slide.content %></textarea>
+    </label>
+    <p class="text-centered"><input type="submit" class="btn btn-green" value="Сохранить"/></p>
+    <script>
+        $(document).ready(function(){
+            initEditor("slideRedactor");
+        });
+    </script>
+</form>
+<% } %>
+<% if (_do == "viewslider"){ %>
+<div class="units-row end">
+    <div class="unit-100 block">
+        <table class="table-stripped table-bordered">
+            <thead>
+            <th>Название слайда</th>
+            <th class="width-10">Положение</th>
+            <th class="width-10">Действие</th>
+            </thead>
+            <tbody>
+            <% for (var i=0; i<slides.length; i++){%>
+            <tr>
+                <td><%-slides[i].title%></td>
+                <td><%-slides[i].sort%></td>
+                <td>
+                    <a  class="btn btn-smaller btn-green btn_icon" href="/admin/extension/slider?do=editslide&id=<%-slides[i].id%>"><i class="fa fa-cog"></i></a>
+                    <a class="btn_icon btn btn-smaller btn-red" href="javascript:deleteSlide(<%-slides[i].id%>)" ><i class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <a href="/admin/extension/slider?do=createslide&id=<%-id%>" class="btn btn-blue">Создать слайд</a>
+    </div>
+</div>
+<% } %>
+<% if (_do == "deleteslide"){ %>
+<form id="deleteslide" action="/admin/extension/slider" method="post">
+    <input type="hidden" name="do" value="deleteslide"/>
+    <input name="csrf" type="hidden" value="<%-csrf%>"/>
+    <input name="id" type="hidden" value="<%-id%>"/>
+    <input name="sdo" type="hidden" value="1"/>
+    <p>Вы действительно желаете удалить слайд?</p>
+</form>
+<% } %>
+<script>
+    function deleteSlide(id){
+        $.ajax({
+            url: "/admin/extension/slider?do=deleteslide&id="+id,
+            success: function(data){
+                modal({
+                    title: "Удаление слайда",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deleteslide").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+
+    function editSlider(id){
+        $.ajax({
+            url:"/admin/extension/slider?do=editslider&id="+id,
+            success: function(data){
+                modal({
+                    title: "Редактирование слайдера",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Сохранить",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#editslider").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function createSlider(){
+        $.ajax({
+            url:"/admin/extension/slider?do=createslider",
+            success: function(data){
+                modal({
+                    title: "Создание слайдера",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Создать",
+                            class: "btn btn-green",
+                            click: function(){
+                                $("#createslider").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function deleteSlider(id){
+        $.ajax({
+            url:"/admin/extension/slider?do=deleteslider&id="+id,
+            success:function(data){
+                modal({
+                    title: "Удаление слайдера",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deleteslider").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function initEditor(id) {
+        var options = {
+            language : 'ru',
+            visualblocks_default_state: true,
+            theme: "modern",
+            menubar: false,
+            fontsize_formats: "6px 7px 8px 9px 10px 11px 12px 13px 14px 15px 16px 17px 18px 19px 20px 21px 22px 23px 24px 25px 26px 27px 28px 29px 30px 31px 32px 36px 38px 40px",
+            font_size_style_values: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
+            plugins: [
+                "advlist autolink lists link charmap preview hr anchor ",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime nonbreaking table contextmenu directionality",
+                "template paste textcolor colorpicker textpattern example"
+            ],
+            toolbar1: "preview fullscreen | styleselect alignleft aligncenter alignright alignjustify bullist numlist outdent indent forecolor fontsizeselect fontselect | link anchor code example table",
+            image_advtab: true,
+
+            file_browser_callback: function(field_name, url, type, win) {
+                if(type=='image') $('#my_form input').click();
+            },
+            // Update model when calling setContent (such as from the source editor popup)
+            mode: 'exact',
+            elements: id,
+            oninit : function(){
+                bgRefresh()
+                //tinymce.get()[0].getBody().style.background = "url('"+$("input[name='image']").val()+"') "+$("input[name='width']").val()+"% "+$("input[name='height']").val()+"% "+$("input[name='repeat']").val();
+            }
+        };
+        tinymce.init(options);
+    }
+
+    $('#fileupload').fileupload({
+        url: "/api/upload",
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $("input[name='image']").val(file.url);
+
+                tinymce.get()[0].getBody().style.background = "url('"+file.url+"') "+$("input[name='width']").val()+"% "+$("input[name='height']").val()+"% "+$("input[name='repeat']").val();
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css('width', progress + '%');
+        }
+    }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+    $("input[name='width'],input[name='height'],input[name='repeat']").on("input",function(){
+        bgRefresh();
+    });
+
+
+    function bgRefresh(){
+        var style = "";
+        if ($("input[name='image']").val()[0] == "#"){
+            style=$("input[name='image']").val();
+        }
+        else {
+            style = "url('"+$("input[name='image']").val()+"') "+$("input[name='width']").val()+"% "+$("input[name='height']").val()+"% "+$("input[name='repeat']").val();
+        }
+
+        tinymce.get()[0].getBody().style.background = style;
+    }
+</script>

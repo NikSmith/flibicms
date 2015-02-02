@@ -1,0 +1,34 @@
+<div class="units-row" ng-controller="api">
+    <div class="unit-100 block content">
+        <table class="table-stripped table-bordered">
+            <thead>
+            <th>Название</th>
+            <th>Файл роутера API</th>
+            <th>Доступ для групп</th>
+            <th>Доступ по IP</th>
+            <th>Состояние</th>
+            <th class="text-centered width-10">Действие</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in routers">
+                    <td>{{item.title}}</td>
+                    <td>{{item.alias}}</td>
+                    <td>{{item.usergroup}}</td>
+                    <td>{{item.ip}}</td>
+                    <td>{{isEnabled(item.enabled)}}</td>
+                    <td class="text-centered">
+                        <button class="btn btn-smaller btn-green btn_icon" ng-click="editApiRouter(item.id)"><i class="fa fa-cog"></i></button>
+                        <button class="btn btn-smaller btn-red btn_icon" ng-click="deleteApiRouter(item.id)"><i class="fa fa-cog"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="pagination" ng-show="pages>1">
+            <li ng-show="page>1"><a href="#" ng-click="getApiRouters(page-1)">&larr;</a></li>
+            <li><span>{{page}} из {{pages}}</span></li>
+            <li ng-show="page<pages"><a href="#" ng-click="getApiRouters(page+1)">&rarr;</a></li>
+        </ul>
+        <button class="btn btn-blue" ng-click="createApiRouter()">Добавить роутер API</button>
+    </div>
+
+</div>

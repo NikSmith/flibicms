@@ -1,0 +1,65 @@
+<form class="forms end" id="widgetForm">
+    <div class="units-row end">
+        <div class="unit-75">
+            <input type="hidden" name="csrf" value="<%-vars.csrf%>"/>
+            <% if (vars.widget){ %><input type="hidden" name="id" value="<%= vars.widget.id %>"/><% } %>
+            <% if (vars.id){ %><input type="hidden" name="id" value="<%= vars.id %>"/><% } %>
+            <% if (vars.target){ %><input type="hidden" name="target" value="<%= vars.target %>"/><% } %>
+            <% if (vars.position){ %><input type="hidden" name="position" value="<%= vars.position %>"/><% } %>
+            <% if (vars.child){ %><input type="hidden" name="child" value="<%= vars.child %>"/><% } %>
+            <label>
+                Название виджета
+                <input type="text" class="width-100" name="title" value="<% if (vars.widget){ %><%= vars.widget.title %><% } else { %>Новый виджет<% } %>"/>
+            </label>
+            <label>
+                Заголовок виджета
+                <input type="text" class="width-100" name="description" value="<% if (vars.widget){ %><%= vars.widget.description %><% } %>"/>
+            </label>
+
+            <label>
+                Тело виджета (HTML-код)
+                <textarea data-ui-tinymce id="tinywidget"  ng-model="content"  class="width-100" name="body"><% if (vars.widget){ %><%= vars.widget.body %><% } %></textarea>
+            </label>
+        </div>
+        <div class="unit-25">
+            <fieldset>
+                <legend>Настройки</legend>
+                <label>
+                    Состояние
+                    <select class="width-100" name="enabled">
+                        <option value="1" <% if (vars.widget && vars.widget.enabled == 1){ %>selected<% } %>>Включен</option>
+                        <option value="0" <% if (vars.widget && vars.widget.enabled == 0){ %>selected<% } %>>Выключен</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать по маске
+                    <input type="text" class="width-100" name="url" value="<% if (vars.widget){ %><%= vars.widget.url %><% } %>"/>
+                </label>
+                <label>
+                    Скрыть по маске
+                    <input type="text" class="width-100" name="url2" value="<% if (vars.widget){ %><%= vars.widget.url2 %><% } %>"/>
+                </label>
+                <label>
+                    Кеширование
+                    <select class="width-100" name="cache">
+                        <option value="0" <%if (vars.widget && vars.widget.cache == 0){%>selected<%}%>>Не кешировать</option>
+                        <option value="3600" <%if (vars.widget && vars.widget.cache == 3600){%>selected<%}%>>1 час</option>
+                        <option value="21600" <%if (vars.widget && vars.widget.cache == 21600){%>selected<%}%>>6 часов</option>
+                        <option value="86400" <%if (vars.widget && vars.widget.cache == 86400){%>selected<%}%>>24 часа</option>
+                    </select>
+                </label>
+                <label>
+                    Доступ для групп
+                    <select name="usergroup"  multiple="multiple" size="10">
+                        <% for(var i=0; i<vars.groups.length; i++){%>
+                        <option value="<%- vars.groups[i].role %>" <%if (vars.widget && vars.widget.usergroup.indexOf(vars.groups[i].role) !=-1){%>selected<%}%>><%- vars.groups[i].title %></option>
+                        <% } %>
+                    </select>
+                </label>
+                <% if(vars.fields){%>
+                <%-vars.fields%>
+                <%}%>
+            </fieldset>
+        </div>
+    </div>
+</form>

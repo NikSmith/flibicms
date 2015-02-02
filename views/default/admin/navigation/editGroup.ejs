@@ -1,0 +1,7 @@
+<div class="forms">
+    <input type="hidden" name="n_csrf" value="<%-vars.csrf%>"/>
+    <label>
+        Введите название группы
+        <input type="text" class="width-100" name="n_title" value="<% if (vars.group){ %><%= vars.group.title %><% } %>"/>
+    </label>
+</div>

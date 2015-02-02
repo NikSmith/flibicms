@@ -1,0 +1,67 @@
+<% if (_do == "index"){ %>
+    <div class="block">
+        <h3>Файл robots.txt</h3>
+        <form class="forms">
+            <input name="csrf" type="hidden" value="<%- csrf %>"/>
+            <label>
+                <textarea name="robots" rows="20"><%-content%></textarea>
+            </label>
+            <p>
+                <a href="javascript:genMap()" class="btn btn-green">Сгенерировать sitemap</a>
+                <a href="javascript:save()" class="btn btn-green">Сохранить robots.txt</a>
+            </p>
+        </form>
+    </div>
+<script>
+    function save(){
+        var obj = {
+            do:"save",
+            csrf : $("input[name='scrf']").val(),
+            content: $("textarea[name='robots']").val()
+        };
+        $.ajax({
+            url: "/admin/extension/sitemap",
+            data:obj,
+            success: function(data){
+                modal({
+                    title: "Сохранение файла robots.txt",
+                    content:{
+                        html:"Файл успешно сохранен"
+                    },
+                    buttons:[
+                        {
+                            title: "Закрыть",
+                            class: "btn btn-green",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+    function genMap(){
+        $.ajax({
+            url: "/admin/extension/sitemap",
+            data:{do:"genmap"},
+            success: function(data){
+                modal({
+                    title: "Генерация карты сайта",
+                    content:{
+                        html:data.html
+                    },
+                    buttons:[
+                        {
+                            title: "Закрыть",
+                            class: "btn btn-green",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+</script>
+<% } %>
+<% if (_do == "genmap"){ %>
+Карта сайта успешно обновлена
+<% } %>

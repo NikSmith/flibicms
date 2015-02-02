@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/jquery.ui.widget.js"></script>
+        <script src="/js/jquery.fileupload.js"></script>
+        <style>
+            .forms{
+                padding: 8px;
+                font-size: 14px;
+            }
+            .progress{
+                background: #fff;
+                padding: 10px 0;
+                border-radius: 5px;
+            }
+            .progress-bar{
+                height: 2px;
+                background: rgb(74, 76, 215);
+                width: 0;
+            }
+            label{
+                width: 100%;
+                display: inline-block;
+                margin-bottom: 12px;
+            }
+            input{
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="forms">
+            <label>Название изображения<br>
+                <input type="text" style="width:92%" name="title" />
+            </label>            
+            <label>
+                Размеры изображения<br>
+                <input type="text" name="width" style="width:44%" placeholder="Ширина"/>
+                <input type="text" name="height" style="width:44%; margin-left:2%" placeholder="Высота"/>
+            </label>
+            <label>
+                Обтекание текстом <br>
+                <select name="float">
+                    <option value="left">По левому краю</option>
+                    <option value="right">По правому краю</option>
+                </select>
+            </label>
+            <label>
+                <input type="file" id="fileupload" name="image">
+            </label>
+
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+        </div>
+
+
+    <script>
+        $(function () {
+            'use strict';
+            var url = "/upload";
+            $('#fileupload').fileupload({
+                url: url,
+                dataType: 'json',
+                done: function (e, data) {
+                    $.each(data.result.files, function (index, file) {
+                        top.tinymce.activeEditor.insertContent('<img src="'+file.url+'">')
+                    });
+                },
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progress .progress-bar').css(
+                            'width',
+                                    progress + '%'
+                    );
+                }
+            }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+
+    </body>
+</html>

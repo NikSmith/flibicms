@@ -1,0 +1,20 @@
+<% if (vars.showtitle){ %>
+    <h1><%- vars.title %></h1>
+<% } %>
+<% if (vars.showdesc){ %>
+    <div>
+        <%- vars.content %>
+    </div>
+<% } %>
+<% if (vars.pages){ %>
+    <% for(var item in vars.pages){ %>
+    <div class="units-row">
+        <div class="unit-100">
+            <div class="width-100">
+                <a href="/<%= vars.pages[item].ctype %>/<%= vars.pages[item].slug %>"><%= vars.pages[item].title %></a>
+            </div>
+        </div>
+    </div>
+    <% } %>
+<% } %>
+<%if (vars.pagination){%><%- vars.pagination %><%}%>

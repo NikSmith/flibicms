@@ -1,0 +1,26 @@
+<div class="units-row end" ng-controller="widgets">
+    <div class="unit-20 block">
+        <div class="forms forms-inline">
+            <div class="nav controllersList">
+                <controllers-List></controllers-List>
+            </div>
+        </div>
+        <div class="forms forms-inline">
+            <h5>Виджеты</h5>
+            <nav class="nav nav-stacked end">
+                <ul>
+                    <li my-draggable=".sortable" draggable-from="main" class="btn btn-small width-100 widgetsItem" ng-repeat="widget in widgets" data-id="{{widget.id}}">{{widget.title}}</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="unit-80 block content">
+        <div class="width-100 text-centered notPages" ng-show="!target">
+            Выберите страницу
+        </div>
+        <div class="width-100" ng-show="target">
+            <div class="width-100">{{title}}</div>
+            <%- vars.grid %>
+        </div>
+    </div>
+</div>

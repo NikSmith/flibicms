@@ -1,0 +1,39 @@
+[
+    {
+        "tag" : "select",
+        "name": "albumid",
+        "desc": "Альбом",
+        "class": "width-100",
+        "data":"ext_photos#id#title#album_id=0"
+    },
+    {
+        "tag" : "input",
+        "type" : "text",
+        "desc" : "Количество фото на странице",
+        "name" : "limit",
+        "class" : "width-50"
+    },
+    {
+        "tag" : "input",
+        "type" : "text",
+        "desc" : "Количество столбцов",
+        "name" : "cols",
+        "class" : "width-50"
+    },
+    {
+        "tag" : "input",
+        "type" : "text",
+        "desc" : "Высота уменьшенной копии",
+        "name" : "height",
+        "class" : "width-50"
+    },
+    {
+        "tag" : "select",
+        "name": "type",
+        "desc": "Тип галереи",
+        "class": "width-50",
+        "data":[
+            {"value":"thumbs","title":"Плитка"}
+        ]
+    }
+]

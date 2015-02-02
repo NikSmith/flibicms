@@ -1,0 +1,96 @@
+<form class="forms end" name="newpage">
+    <div class="units-row end">
+        <div class="unit-75">
+            <input type="hidden" name="newpage_csrf" value="<%- vars.csrf%>"/>
+            <input type="hidden" name="create" value="1"/>
+            <label>
+                Название материала
+                <span class="error" ng-show="submitted && newpage.title.$error.required">Необходимо указать название</span>
+                <span class="error" ng-show="submitted && (newpage.title.$error.minlength || newpage.title.$error.maxlength)">Не менее 5 и не более 200 символов</span>
+                <input type="text" ng-class="(submitted && (newpage.title.$error.required || newpage.title.$error.minlength || newpage.title.$error.maxlength))?'input-error':''" ng-minlength="5" ng-maxlength="300" required  class="width-100"  name="title" ng-blur="checkSlug(newPageData.slug)" ng-change="inputPageTitle()" ng-model="newPageData.title"/>
+            </label>
+            <label>
+                Заголовок страницы <span class="forms-desc"></span>
+                <input type="text" class="width-100" name="pagetitle" ng-model="newPageData.pagetitle" value="{{newPageData.pagetitle}}"/>
+            </label>
+            <label>
+                URL адрес страницы
+                <span class="error" ng-show="submitted && newpage.slug.$error.required">Необходимо указать адрес страницы</span>
+                <span class="error">{{ slugExists? 'Данный адрес уже используется':'' }}</span>
+                <input type="text" required ng-class="(slugExists || (submitted && (newpage.slug.$error.required)))?'input-error':''" class="width-50 my-input" name="slug" ng-blur="checkSlug(newPageData.slug)" ng-model="newPageData.slug" value="{{newPageData.slug}}"  />
+            </label>
+            <label>
+                Родительский материал
+                <span class="error" ng-show="submitted && newpage.TreeId.$error.required">Выберите раздел</span>
+                <select class="width-50" name="TreeId" required ng-model="newPageData.TreeId">
+                    <option ng-repeat="item in pages" value="{{item.id}}" ng-selected="{{getSelected($index<%if(vars.item){%>,'<%- vars.item.NSLeft %>','<%- vars.item.NSRight %>','<%- vars.item.NSLevel %>'<%}%>)}}" offset-title="{{item.title}}" offset-level="{{item.NSLevel}}"></option>
+                </select>
+            </label>
+            <label>
+                Контент
+                <textarea data-ui-tinymce id="tinywidget" class="width-100" name="content" ng-model="newPageData.content"></textarea>
+            </label>
+        </div>
+        <div class="unit-25">
+            <fieldset>
+                <legend>Настройки</legend>
+                <label>
+                    Публикация материала
+                    <select class="width-100" name="is_pub" ng-model="newPageData.is_pub">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Создать пункт меню
+                    <select class="width-100" name="is_pub" ng-model="newPageData.menu" ng-init="newPageData.menu=0">
+                        <option value="0">---</option>
+                        <option ng-repeat="item in menuGroups" value="{{item.id}}">{{item.title}}</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать заголовок
+                    <select class="width-100" name="showtitle" ng-model="newPageData.showtitle">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Отображать контент
+                    <select class="width-100" name="showdesc" ng-model="newPageData.showdesc">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                    </select>
+                </label>
+                <label>
+                    Вложенные материалы
+                    <select class="width-100" name="showchild" ng-model="newPageData.showchild">
+                        <option value="1">Показывать</option>
+                        <option value="0">Скрыть</option>
+                    </select>
+                </label>
+                <label>
+                    Количество выводимых материалов
+                    <input type="text" class="width-25" name="prepage" ng-model="newPageData.prepage" ng-init="newPageData.prepage=10"/>
+                </label>
+                <label>
+                    Шаблон
+                    <div class="input-groups width-100">
+                        <input type="text" name="template" ng-model="newPageData.template" ng-init="newPageData.template=''"/><span class="input-append">.ejs</span>
+                    </div>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>SEO</legend>
+                <label>
+                    SEO ключи
+                    <input type="text" class="width-100" name="seokeys" ng-model="newPageData.seokeys"/>
+                </label>
+                <label>
+                    SEO описание
+                    <textarea class="width-100" name="seodesc" ng-model="newPageData.seodesc"></textarea>
+                </label>
+            </fieldset>
+        </div>
+    </div>
+</form>

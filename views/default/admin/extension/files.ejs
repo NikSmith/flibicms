@@ -1,0 +1,95 @@
+<% if (_do == "viewall"){ %>
+    <div class="units-row end">
+        <div class="unit-100 block">
+            <table class="table-stripped table-bordered">
+                <thead>
+                <th>Название файла</th>
+                <th>Ссылка</th>
+                <th class="width-10">Скачено</th>
+                <th class="width-10">Действие</th>
+                </thead>
+                <tbody>
+                    <% for (var i=0; i<files.length; i++){%>
+                        <tr>
+                            <td><%-files[i].title%></td>
+                            <td><a href="<%-files[i].link%>"><%-files[i].title%></a></td>
+                            <td><%-files[i].downloads%></td>
+                            <td>
+                                <a class="btn_icon btn btn-smaller btn-red" href="javascript:deleteFile(<%-files[i].id%>)" ><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <%- pagination %>
+            <a href="/admin/extension/files?do=upload" class="btn btn-blue">Закачать файл</a>
+        </div>
+    </div>
+<% } %>
+
+<% if (_do == "upload"){ %>
+<fieldset>
+    <legend>Информация</legend>
+    <p>После загрузки файлов на сервер, Вам будут доступны ссылки для скачивания, которые позволят вести учет количества скачиваний того или иного файла</p>
+    <p><strong>Размер файла не должен превышать:</strong> <%-maxUploadFileSize%>Мб<br>
+        <strong>Общий размер загружаемых файлов до:</strong> <%-maxAllFilesSize%>Мб</p>
+</fieldset>
+<div class="units-row end">
+    <div class="unit-50">
+        <form class="forms end" action="/admin/extension/files" method="post" enctype="multipart/form-data">
+            <input name="do" type="hidden" value="upload"/>
+            <input name="csrf" type="hidden" value="<%-csrf%>"/>
+            <fieldset>
+                <legend>Загрузка файла</legend>
+                <label>
+                    Название файла
+                    <input class="width-100" type="text" name="title"/>
+                </label>
+                <label>
+                    <input type="file" name="files" multiple/>
+                </label>
+                <p class="end text-centered">
+                    <input type="submit" class="btn btn-green" value="Закачать"/>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<% } %>
+<% if (_do == "deletefile"){ %>
+    <form id="deletefile" class="end" action="/admin/extension/files" method="post">
+        <input type="hidden" name="do" value="deletefile"/>
+        <input name="csrf" type="hidden" value="<%-csrf%>"/>
+        <input name="id" type="hidden" value="<%-id%>"/>
+        <input name="sdo" type="hidden" value="1"/>
+        <p class="end">Вы действительно желаете удалить файл?</p>
+    </form>
+<%}%>
+
+<script>
+    function deleteFile(id){
+        $.ajax({
+            url: "/admin/extension/files?do=deletefile&id="+id,
+            success: function(data){
+                modal({
+                    title: "Удаление файла",
+                    content: {html:data.html},
+                    buttons:[
+                        {
+                            title: "Удалить",
+                            class: "btn btn-red",
+                            click: function(){
+                                $("#deletefile").submit();
+                            }
+                        },
+                        {
+                            title: "Отмена",
+                            class: "btn",
+                            click: function(){ this.close(); }
+                        }
+                    ]
+                })
+            }
+        });
+    }
+</script>

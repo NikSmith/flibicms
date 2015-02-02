@@ -1,0 +1,74 @@
+<div class="widget">
+    <% if (vars.title){ %>
+    <div class="widgettitle h3"><%-vars.title%></div>
+    <%}%>
+    <div class="widgetbody" id="gallery_<%-vars.cfg.albumid%>">
+        <% if (vars.body){ %>
+            <%-vars.body%>
+        <%}%>
+        <% if (vars.cfg.type == "thumbs"){%>
+        <ul class="blocks-<%-vars.cfg.cols%>">
+            <% for (var x=0; x<vars.photos.length; x++){%>
+            <li class="gallery" style="height: <%-vars.cfg.height%>px; line-height: <%-vars.cfg.height%>px;">
+                <a href="javascript:viewPhoto(<%- vars.photos[x].id%>)" style="height: <%-vars.cfg.height%>px; line-height: <%-vars.cfg.height%>px;">
+                    <img src="/uploads/photos/thumbs/<%- vars.photos[x].image%>" class="photoItem" alt="<%- vars.photos[x].title%>"/>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+        <% if (vars.pages>1){ %>
+        <div class="units-row">
+            <div class="unit-100">
+                <ul class="pagination">
+                    <% if (vars.page>1){ %>
+                    <li><a href="javascript:gallery(<%-vars.cfg.albumid%>,<%-vars.page-1%>)">&larr;</a></li>
+                    <% } %>
+                    <li><span><%-vars.page%> из <%-vars.pages%></span></li>
+                    <% if (vars.page<vars.pages){ %>
+                    <li><a href="javascript:gallery(<%-vars.cfg.albumid%>,<%-vars.page+1%>)">&rarr;</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <% } %>
+        <script>
+            function viewPhoto(id){
+                $.ajax({
+                    url:"/api/gallery",
+                    data:{do:"viewphoto",id:id},
+                    success: function(data){
+                        var popup = modal({
+                            title: "",
+                            content: {html:data},
+                            width: 960,
+                            load: function(){
+                                $("img").on("load",function(){
+                                    popup.resize()
+                                })
+                            }
+                        });
+                    }
+                });
+            }
+            function gallery(album,page){
+                var cfg = {
+                    "do":"getpage",
+                    "album":album,
+                    "limit":<%-vars.cfg.limit%>,
+                    "height":<%-vars.cfg.height%>,
+                    "cols":<%-vars.cfg.cols%>
+                };
+                cfg['page'] = page;
+                $.ajax({
+                    url: "/api/gallery",
+                    data:cfg,
+                    success: function(data){
+                        $("#gallery_"+album).html(data)
+                    }
+                });
+                return false;
+            }
+        </script>
+        <% } %>
+    </div>
+</div>

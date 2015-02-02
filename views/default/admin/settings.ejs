@@ -1,0 +1,178 @@
+<div class="units-row" ng-controller="settings">
+    <div class="unit-100 block content">
+            <div class="units-row">
+                <div class="unit-33">
+                    <fieldset>
+                        <legend>Контроллер по-умолчанию:</legend>
+                        <label>
+                            Controller
+                            <input type="text" ng-model="config.defaultController" class="width-100"/>
+                        </label>
+                        <label>
+                            Action
+                            <input type="text" ng-model="config.defaultAction" class="width-100"/>
+                        </label>
+                        <label>
+                            Заголовок страницы:
+                            <input type="text" ng-model="config.title" class="width-100"/>
+                        </label>
+                        <label>
+                            Seokeys:
+                            <input type="text" ng-model="config.seokeys" class="width-100"/>
+                        </label>
+                        <label>
+                            Seodesc:
+                            <textarea ng-model="config.seodesc" class="width-100"></textarea>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>MYSQL:</legend>
+                        <label>
+                            Адрес сервера:
+                            <input type="text" ng-model="config.dbhost" class="width-100"/>
+                        </label>
+                        <label>
+                            Порт:
+                            <input type="text" ng-model="config.dbport" class="width-100"/>
+                        </label>
+                        <label>
+                            Название БД:
+                            <input type="text" ng-model="config.dbname" class="width-100"/>
+                        </label>
+                        <label>
+                            Логин:
+                            <input type="text" ng-model="config.dbuser" class="width-100"/>
+                        </label>
+                        <label>
+                            Пароль:
+                            <input type="text" ng-model="config.dbpass" class="width-100"/>
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="unit-33">
+
+                    <fieldset>
+                        <legend>Загрузка файлов/фото:</legend>
+                        <label>
+                            MAX размер загружаемого файла (Мб):
+                            <input type="text" ng-model="config.maxUploadFileSize" class="width-100"/>
+                        </label>
+                        <label>
+                            MAX размер всех файлов за одну загрузку (Мб):
+                            <input type="text" ng-model="config.maxAllFilesSize" class="width-100"/>
+                        </label>
+                        <label>
+                            Ширина обрезаемой копии фото:
+                            <input type="text" ng-model="config.thumbsImageH" class="width-100"/>
+                        </label>
+                        <label>
+                            Высота обрезаемой копии фото:
+                            <input type="text" ng-model="config.thumbsImageV" class="width-100"/>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Настройки почты:</legend>
+                        <label>
+                            Email администратора:
+                            <input type="text" ng-model="config.adminEmail" class="width-100"/>
+                        </label>
+                        <label>
+                            SMTP сервер
+                            <select ng-model="config.smtp" class="width-100">
+                                <option value="false" ng-selected="config.smtp == false">По-умолчанию</option>
+                                <option value="true" ng-selected="config.smtp == true">Сторонний smtp сервер</option>
+                            </select>
+                        </label>
+                        <label>
+                            SMTP сервер:
+                            <input type="text" ng-model="config.smtpHost" class="width-100"/>
+                        </label>
+                        <label>
+                            SMTP порт:
+                            <input type="text" ng-model="config.smtpPort" class="width-100"/>
+                        </label>
+                        <label>
+                            SMTP SSL:
+                            <select ng-model="config.smtpSSL" class="width-100">
+                                <option value="false" ng-selected="config.smtpSSL == false">False</option>
+                                <option value="true" ng-selected="config.smtpSSL == true">True</option>
+                            </select>
+                        </label>
+                        <label>
+                            Логин:
+                            <input type="text" ng-model="config.smtpUser" class="width-100"/>
+                        </label>
+                        <label>
+                            Пароль:
+                            <input type="text" ng-model="config.smtpPass" class="width-100"/>
+                        </label>
+                    </fieldset>
+
+                </div>
+                <div class="unit-33">
+                    <fieldset>
+                        <legend>Кэширование/сессии:</legend>
+                        <label>
+                            Время жизни сессии:
+                            <input type="text" ng-model="config.sessionTime" class="width-100"/>
+                        </label>
+                        <label>
+                            Композитный сайт (КС)
+                            <select ng-model="config.mainCache" class="width-100">
+                                <option value="false" ng-selected="config.mainCache == false">Выключено</option>
+                                <option value="true" ng-selected="config.mainCache == true">Включено</option>
+                            </select>
+                        </label>
+                        <label>
+                            Время кэширования КС:
+                            <input type="text" ng-model="config.cacheTime" class="width-100"/>
+                        </label>
+                        <label>
+                            Кэш шаблонов виджетов
+                            <select ng-model="config.cacheTplWidget" class="width-100">
+                                <option value="false" ng-selected="config.cacheTplWidget == false">Нет</option>
+                                <option value="true" ng-selected="config.cacheTplWidget == true">Да</option>
+                            </select>
+                        </label>
+                        <label>
+                            Кэш шаблонов контроллеров
+                            <select ng-model="config.cacheTplController" class="width-100">
+                                <option value="false" ng-selected="config.cacheTplController == false">Нет</option>
+                                <option value="true" ng-selected="config.cacheTplController == true">Да</option>
+                            </select>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Управление:</legend>
+                        <label>
+                            Состояние сайта
+                            <select ng-model="config.siteoff" class="width-100">
+                                <option value="false" ng-selected="config.siteoff == false">Работает</option>
+                                <option value="true" ng-selected="config.siteoff == true">Отключен</option>
+                            </select>
+                        </label>
+                        <label>
+                            Сообщение
+                            <textarea ng-model="config.siteoffDesc" rows="8" class="width-100"></textarea>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Дизайн</legend>
+                        <label>
+                            Шаблон:
+                            <select class="width-100" ng-model="config.template" ng-init="config.template='<%-vars.template%>'">
+                                <% vars.templates.forEach(function(tpl){ %>
+                                <option value="<%- tpl %>"><%- tpl %></option>
+                                <% }); %>
+                            </select>
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="units-row">
+                <div class="unit-100">
+                    <input type="submit" value="Сохранить" class="btn btn-green" ng-click="saveSettings()"/>
+                </div>
+            </div>
+    </div>
+</div>

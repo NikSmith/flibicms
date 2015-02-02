@@ -1,0 +1,12 @@
+<div class="forms">
+    <input type="hidden" name="u_csrf" value="<%-vars.csrf%>"/>
+    <input type="hidden" name="u_id" value="<% if (vars.group){ %><%= vars.group.id %><% } %>"/>
+    <label>
+        Название группы
+        <input type="text" class="width-100" name="u_title" value="<% if (vars.group){ %><%= vars.group.title %><% } %>"/>
+    </label>
+    <label>
+        Псевдоним группы
+        <input type="text" class="width-100" name="u_role" value="<% if (vars.group){ %><%= vars.group.role %><% } %>"/>
+    </label>
+</div>

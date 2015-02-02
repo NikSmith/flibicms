@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title><%- title %></title>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <% for(var item in header){ %>
+    <%- header[item] %>
+    <% } %>
+
+    <script src="/js/jq.watson.js"></script>
+    <script src="/system/js/admin.js"></script>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/system/css/kube.css"/>
+    <link rel="stylesheet" href="/system/css/styles.css"/>
+    <script src="/js/tinymce/tinymce.min.js"></script>
+    <script src="/js/jquery.ui.widget.js"></script>
+    <script src="/js/jquery.fileupload.js"></script>
+</head>
+<body ng-app="admin">
+<header>
+    <div class="units-container">
+        <div class="units-row end">
+            <div class="unit-20">
+                <a href="/admin" class="logo">
+                    FlibiCMS
+                </a>
+            </div>
+            <div class="unit-80">
+                <a href="/admin/navigation" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-bars"></i></span>
+                    <span class="nav_title">Навигация</span>
+                </a>
+                <a href="/admin/content" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-file-text-o"></i></span>
+                    <span class="nav_title">Контент</span>
+                </a>
+                <a href="/admin/extension/index" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-magic"></i></span>
+                    <span class="nav_title">Расширения</span>
+                </a>
+                <a href="/admin/widgets" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-puzzle-piece"></i></span>
+                    <span class="nav_title">Виджеты</span>
+                </a>
+                <a href="/admin/users" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-users"></i></span>
+                    <span class="nav_title">Пользователи</span>
+                </a>
+                <a href="/admin/access" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-unlock-alt"></i></span>
+                    <span class="nav_title">Доступ</span>
+                </a>
+                <a href="/admin/settings" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-cog"></i></span>
+                    <span class="nav_title">Настройки</span>
+                </a>
+                <a href="/admin/api" class="nav_btn">
+                    <span class="nav_icon"><i class="fa fa-share-alt"></i></span>
+                    <span class="nav_title">API</span>
+                </a>
+                <div class="unit-push-right">
+                    <a href="/users/logout" class="nav_btn">
+                        <span class="nav_icon"><i class="fa fa-power-off"></i></span>
+                        <span class="nav_title">Выход</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="units-container">
+        <div class="units-row">
+            <div class="unit-100">
+                <div class="main_block">
+                    <%- body %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="units-container">
+        <div class="units-row end">
+            <div class="unit-100 text-centered">
+                Разработано <a href="http://watson-studio.com">WatsonStudio</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    var link = window.location.pathname;
+    $('a[href="'+link+'"]').addClass('active');
+</script>
+</body>
+</html>

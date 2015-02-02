@@ -1,0 +1,30 @@
+[
+    {
+        "tag" : "select",
+        "name": "menuid",
+        "desc": "Группа меню",
+        "class": "width-100",
+        "data":"menu#id#title#NSLevel=0"
+    },
+    {
+        "tag" : "select",
+        "name": "type",
+        "desc": "Тип меню",
+        "class": "width-100",
+        "data":[
+            {"value":"v","title":"Вертикальное меню"},
+            {"value":"h","title":"Горизонтальное меню"}
+        ]
+    },
+    {
+        "tag" : "select",
+        "name": "float",
+        "desc": "Ориентация",
+        "class": "width-100",
+        "data":[
+            {"value":"left","title":"С левого края"},
+            {"value":"right","title":"С правого края"}
+        ]
+    }
+
+]

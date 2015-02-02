@@ -1,0 +1,28 @@
+<div class="widget">
+    <% if (vars.title){ %><div class="widgettitle h3"><%-vars.title%></div><%}%>
+    <nav class="menu nav-<%-vars.config.type%>-<%-vars.config.float%>">
+        <ul>
+            <% var last = 0; %>
+            <% var last_access = 0; %>
+            <% var visible = true; %>
+            <% vars.items.forEach(function(item,ind){ %>
+                <% var access = (item.access.indexOf(vars.usergroup) != -1 && item.enabled);%>
+                <% if (!visible && last_access >= item.NSLevel){ visible = true;  } %>
+                <% if ((item.NSRight-item.NSLeft)>1 && !access){ visible = false; last_access = item.NSLevel; }%>
+                <% if (visible && access){ %>
+                    <% if (last != 0 && last < item.NSLevel){ %><ul><% } %>
+                    <% if (last != 0 && item.NSLevel<last){ %>
+                        <% while (last > item.NSLevel){%>
+                            </li></ul>
+                            <% last--;%>
+                        <% } %>
+                    <% } %>
+                    <% if (last != 0 && last == item.NSLevel){ %></li><% } %>
+                    <% last = item.NSLevel;%>
+                    <li><a href="<%-item.url%>" target="<%-item.target%>"><%-item.title%></a>
+                    <% if (ind+1 == vars.items.length){ %></li><% } %>
+                <%}%>
+            <% }); %>
+        </ul>
+    </nav>
+</div>

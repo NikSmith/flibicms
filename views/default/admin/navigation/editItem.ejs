@@ -1,0 +1,41 @@
+<div class="forms">
+    <input type="hidden" name="n_csrf" value="<%-vars.csrf%>"/>
+    <label>
+        Название пункта меню
+        <input type="text" class="width-100" name="n_title" value="<% if (vars.item){ %><%- vars.item.title %><% } %>">
+    </label>
+    <label>
+        Родительский раздел
+        <select class="width-100" name="n_root">
+            <option ng-repeat="item in menuLists" value="{{item.id}}"  ng-selected="{{getSelected($index<%if(vars.item){%>,'<%- vars.item.NSLeft %>','<%- vars.item.NSRight %>','<%- vars.item.NSLevel %>'<%}%>)}}" offset-title="{{item.title}}" offset-level="{{item.NSLevel}}"></option>
+        </select>
+    </label>
+    <label>
+        URL адрес
+        <input type="text" class="width-100" name="n_url" value="<% if (vars.item){ %><%- vars.item.url %><% } %>">
+    </label>
+    <label>
+        Открывать пункт меню
+        <select name="n_target">
+            <option value="_self" <% if (vars.item && vars.item.target == "_self"){ %>selected<% } %>>В этом же окне</option>
+            <option value="_parent" <% if (vars.item && vars.item.target == "_parent"){ %>selected<% } %>>В родительском окне</option>
+            <option value="_blank" <% if (vars.item && vars.item.target == "_blank"){ %>selected<% } %>>В новом окне</option>
+            <option value="_top" <% if (vars.item && vars.item.target == "_top"){ %>selected<% } %>>Поверх окон</option>
+        </select>
+    </label>
+    <label>
+        Состояние
+        <select name="n_enabled">
+            <option value="1" <% if (vars.item && vars.item.enabled == 1){ %>selected<% } %>>Включен</option>
+            <option value="0"<% if (vars.item && vars.item.enabled == 0){ %>selected<% } %>>Отключен</option>
+        </select>
+    </label>
+    <label>
+        Раздел виден для седующих групп
+        <select name="n_access" class="width-100" multiple="multiple" size="5">
+            <% for(var i=0; i<vars.groups.length; i++){ %>
+            <option value="<%= vars.groups[i].role %>" <% if (vars.item && vars.item.access.indexOf(vars.groups[i].role) != -1){ %>selected<% } %>><%= vars.groups[i].title %></option>
+            <% } %>
+        </select>
+    </label>
+</div>

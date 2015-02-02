@@ -1,0 +1,51 @@
+<div class="units-row" ng-controller="content">
+    <div class="unit-20 block">
+        <div class="forms forms-inline">
+            <h5>Группы материалов</h5>
+            <ul class="menuList">
+                <li ng-repeat="item in ctypes" class="btn btn-small width-100" ng-click="view_pages(item.id)" ng-class="(item.id==ctype)?'btn-blue':''">
+                    {{item.title}}
+                </li>
+            </ul>
+        </div>
+        <div class="forms forms-inline">
+            <h5>Управление</h5>
+            <ul class="menuList">
+                <li class="btn btn-small width-100" ng-click="create_page()" ng-show="ctype">Создать материал</li>
+                <li class="btn btn-small width-100" ng-click="createGroup()">Создать группу</li>
+                <li class="btn btn-small width-100" ng-click="editGroup()" ng-show="ctype">Редактировать группу</li>
+                <li class="btn btn-red btn-small width-100" ng-click="deleteGroup()" ng-show="ctype">Удалить группу</li>
+            </ul>
+        </div>
+    </div>
+    <div class="unit-80 block content">
+        <div class="table-container">
+            <table class="table-stripped table-bordered">
+                <thead>
+                <th>Id</th>
+                <th>Название материала</th>
+                <th>Ссылка</th>
+                <th class="text-centered width-10">Состояние</th>
+                <th>Действие</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in pages | filter:{ NSLevel: '!0' }">
+                    <td>{{item.id}}</td>
+                    <td  offset-title="{{item.title}}" offset-level="{{item.NSLevel}}"></td>
+                    <td>{{item.slug}}</td>
+                    <td class="text-centered">{{is_pub(item.is_pub)}}</td>
+                    <td>
+                        <button class="btn btn-smaller btn-green btn_icon" ng-click="editPage(item.id)"><i class="fa fa-cog"></i></button>
+                        <button class="btn_icon btn btn-smaller btn-red" ng-click="deletePage(item.id)"><i class="fa fa-times"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination" ng-show="total !=1 && pages.length">
+            <li ng-show="page>1"><a href="javascript:void(0)" ng-click="view_pages(ctype,(page-1))">&larr;</a></li>
+            <li><span>{{page}} из {{total}}</span></li>
+            <li ng-show="page<total"><a href="javascript:void(0)" ng-click="view_pages(ctype,(page+1))">&rarr;</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="units-row" ng-controller="users">
+    <div class="unit-20 block">
+        <h5>Группы пользователей</h5>
+        <nav class="nav nav-stacked end">
+            <ul class="menuList">
+                <li ng-repeat="group in groups"><button class="btn btn-small width-100" ng-click="editGroup(group.id)">{{group.title}}</button></li>
+                <li class="btn btn-small btn-green width-100" ng-click="createGroup()">Создать группу</li>
+                <li class="btn btn-small btn-green width-100" ng-click="createUser()">Создать пользователя</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="unit-80 block content">
+        <div ng-show="!info">
+            <table class="table-stripped table-bordered">
+                <thead>
+                    <th>Логин</th>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Группа</th>
+                    <th class="text-centered">Вкл</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.login}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.title}}</td>
+                    <td class="text-centered">{{user.is_banned}}</td>
+                    <td>
+                        <button class="btn btn-smaller btn-green btn_icon" ng-click="editUser(user.id)"><i class="fa fa-cog"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

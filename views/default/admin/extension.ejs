@@ -1,0 +1,20 @@
+<div class="units-row">
+    <div class="unit-20 block">
+        <div class="forms forms-inline nav">
+            <h5>Расширения</h5>
+            <ul class="menuList">
+                <% for (var i=0; i<vars.ext.length; i++){ %>
+                <li class=""><a href="/admin/extension/<%- vars.ext[i].target%>" class="btn btn-small width-100"><%- vars.ext[i].title%></a></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+    <div class="unit-80 block content">
+        <% if (vars.html){ %>
+            <%- vars.html %>
+        <%} else { %>
+            <h2>Расширения </h2>
+            <p>Выберете расширение для настройки необходимого функционала сайта.</p>
+        <% } %>
+    </div>
+</div>

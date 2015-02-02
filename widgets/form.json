@@ -1,0 +1,9 @@
+[
+    {
+        "tag" : "select",
+        "name": "formid",
+        "desc": "Форма",
+        "class": "width-100",
+        "data":"ext_forms#id#title#1=1"
+    }
+]
